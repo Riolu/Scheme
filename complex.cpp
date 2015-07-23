@@ -578,14 +578,14 @@ void Complex::print(){
 	}
 	if (imag_->type_ == FLOAT){
 		Float *tmp = SCAST_FLOAT(imag_);
-//		if (abs(tmp->number_)<1e-300){ printf("\n"); return; } //精度可能存在问题 
+//		if (abs(tmp->number_)<1e-300){ printf("\n"); return; } //精度可能存在问题
 		if (tmp->number_ >= 0) printf("+");
 	}
 	imag_->print();
 	printf("i");
 }
 
-Complex *Complex::from_string(const char *expression_in_char){ 
+Complex *Complex::from_string(const char *expression_in_char){
 	string expression = expression_in_char;
 	string real, imag;
 	int len = expression.size();
@@ -595,10 +595,10 @@ Complex *Complex::from_string(const char *expression_in_char){
 		if (expression[i] == '+' || expression[i] == '-'){
 			if (i == 0){ separate_pos = 0; }
 			else if (expression[i - 1] == 'e') continue;
-			else { separate_pos = i; break; } 
+			else { separate_pos = i; break; }
 		}
 	}
-	if (separate_pos == -1) return NULL; 
+	if (separate_pos == -1) return NULL;
 	if (separate_pos == 0){
 		imag = expression.substr(0, len - 1);
 		if (imag == "+" || imag == "-") imag += "1";

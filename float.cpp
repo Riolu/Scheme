@@ -14,20 +14,24 @@ using namespace std;
 
 #define ABS(x) ((x)<0?(-(x)):(x))
 
-string reverse(const string &s){
-	string temp = s;
-	std::reverse(temp.begin(), temp.end());
-	temp.erase(temp.length() - 1, 1);
-	temp = s[0] + temp;
-	return temp;
+void turn(string &str, double n){
+	if (n<10) str += n + '0';
+	else{
+		turn(str, n / 10);
+		str += fmod(n, 10) + '0';
+	}
 }
 
 string doubleToString(double d){
-	ostringstream os;
-	os.precision(18);
-	if (os << d)
-		return os.str();
-	return "invalid conversion";
+	string str="";
+	turn(str, d);
+	return str;
+
+	//ostringstream os;
+	//os.precision(18);
+	//if (os << d)
+	//	return os.str();
+	//return "invalid conversion";
 }
 
 double stringToDouble(const string &str){
