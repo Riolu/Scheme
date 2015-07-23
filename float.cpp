@@ -24,6 +24,10 @@ void turn(string &str, double n){
 
 string doubleToString(double d){
 	string str="";
+	if (d < 0){
+		d = fabs(d);
+		str += '-';
+	}
 	turn(str, d);
 	return str;
 
