@@ -33,6 +33,9 @@
     <ClCompile Include="rational.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="boolean.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calc_exp.h">
@@ -63,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rational.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="datatype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boolean.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

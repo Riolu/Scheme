@@ -49,6 +49,8 @@ public:
 	virtual Number *imagpart();
 	virtual Number *mag();
 	virtual Number *ang();
+	virtual Boolean *less(Number *number2);
+
 	virtual void print();
 	static Rational *from_string(const char *expression_in_char);
 

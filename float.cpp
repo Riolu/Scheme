@@ -324,6 +324,12 @@ Number *Float::ang(){
 	return new Float(0);
 }
 
+Boolean *Float::less(Number *number2){
+	Float *tmp = SCAST_FLOAT(number2);
+	if (number_ < tmp->number_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
 void Float::print(){
 	if (trunc(number_) == number_ && fabs(number_)< 1e18){ printf("%.18g", number_); cout << ".0"; }
 	else printf("%.18g", number_);

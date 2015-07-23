@@ -4,15 +4,15 @@
 #include "next_token.h"
 #include <cstdio>
 
-Number *calc_exp(){
+Datatype *calc_exp(){
     char *tk0 = next_token();
-    Number *res;
+	Datatype *res;
     if (*tk0 == '(')
     {
         char *tk1 = next_token();
         Opt *opt;
         Cons *cons = new Cons(NULL, NULL), *tail = cons;
-        Number *val;
+		Datatype *val;
 		if(tk1==NULL){printf("123");throw 0;}
 		if (strcmp(tk1, "+") == 0)opt = new Add();
 		else if (strcmp(tk1, "-") == 0) opt = new Sub();
@@ -50,6 +50,8 @@ Number *calc_exp(){
 		else if (strcmp(tk1, "imag-part") == 0) opt = new Imagpart();
 		else if (strcmp(tk1, "magnitude") == 0) opt = new Magnitude();
 		else if (strcmp(tk1, "angle") == 0) opt = new Angle();
+		else if (strcmp(tk1, "<") == 0) opt = new Less();
+
 		else throw 0;
         while ((val = calc_exp()))
         {
@@ -72,6 +74,7 @@ Number *calc_exp(){
 		res=Rational::from_string(tk0);
 		if(!res) {res = Float::from_string(tk0);}
 		if(!res) { res = Complex::from_string(tk0);}
+		if (!res) { res = Boolean::from_string(tk0); }
 		if(res==NULL){throw 0;}
     }
     return res;

@@ -1,13 +1,15 @@
 #include "opt.h"
+#include "number.h"
 #include "float.h"
 #include "rational.h"
 #include "complex.h"
-#include "number.h"
+#include "boolean.h"
 #include <cmath>
 #include <iomanip>
 #include <sstream>
 #include <complex>
 #include <cstdlib>
+#define SCAST_NUMBER(x) static_cast<Number*>(x)
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 
@@ -23,7 +25,7 @@ class Add : public Opt {
 			{
 				throw 0;
 			}
-            Number *opr = con->car, *conv;
+            Number *opr = SCAST_NUMBER(con->car), *conv;
             last = res;
             if (res->type_ > opr->type_)
 			{
@@ -56,7 +58,7 @@ class Sub:public Opt{
 			cnt++;
 		}
 		Number *res=new Rational("0", "1"),*last;
-		Number *opr = con->car, *conv;
+		Number *opr = SCAST_NUMBER(con->car), *conv;
 		last=res;
 		if(cnt==1)
 		{
@@ -77,7 +79,7 @@ class Sub:public Opt{
         delete conv;
 		for(;con;con=con->cdr)
 		{
-			opr=con->car;
+			opr=SCAST_NUMBER(con->car);
 			last=res;
 			if(res->type_>opr->type_)
 				res=res->sub(conv=res->convert(opr));
@@ -100,7 +102,7 @@ class Mul : public Opt {
 			{
 				throw 0;
 			}
-            Number *opr = con->car, *conv;
+            Number *opr = SCAST_NUMBER(con->car), *conv;
             last = res;
             if (res->type_ > opr->type_)
                 res = res->mul(conv = res->convert(opr));
@@ -127,7 +129,7 @@ class Div:public Opt{
 			cnt++;
 		}
 		Number *res=new Rational("1","1"),*last;
-		Number *opr=con->car,*conv;
+		Number *opr=SCAST_NUMBER(con->car),*conv;
 		last=res;
 		Number *zero = new Float(0.0);
 		if(cnt==1)
@@ -149,7 +151,7 @@ class Div:public Opt{
 		delete conv;
 		for(;con;con=con->cdr)
 		{
-			opr=con->car;
+			opr = SCAST_NUMBER(con->car);
 			last=res;
 			if(res->type_>opr->type_)
 				res=res->div(conv=res->convert(opr));
@@ -166,14 +168,14 @@ class Abs:public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->abs();
+		return SCAST_NUMBER(con->car)->abs();
 	}
 };
 
 class Quotient:public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		Number *res = con->car, *opr = con->cdr->car, *last, *conv;
+		Number *res = SCAST_NUMBER(con->car), *opr = SCAST_NUMBER(con->cdr->car), *last, *conv;
 		if (res->type_<1 || res->type_>3) throw 0;
 		if (opr->type_<1 || opr->type_>3) throw 0;
 		last = res;
@@ -190,7 +192,7 @@ class Quotient:public Opt{
 class Remainder:public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		Number *res = con->car, *opr = con->cdr->car, *last, *conv;
+		Number *res = SCAST_NUMBER(con->car), *opr = SCAST_NUMBER(con->cdr->car), *last, *conv;
 		if (res->type_<1 || res->type_>3) throw 0;
 		if (opr->type_<1 || opr->type_>3) throw 0;
 		last = res;
@@ -207,7 +209,7 @@ class Remainder:public Opt{
 class Modulo :public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		Number *res = con->car, *opr = con->cdr->car, *last, *conv;
+		Number *res = SCAST_NUMBER(con->car), *opr = SCAST_NUMBER(con->cdr->car), *last, *conv;
 		if (res->type_<1 || res->type_>3) throw 0;
 		if (opr->type_<1 || opr->type_>3) throw 0;
 		last = res;
@@ -227,7 +229,7 @@ class Gcd :public Opt{
 		Number *last;
 		for (; con; con = con->cdr){
 			if (con->car->type_>3 || con->car->type_<1) throw 0;
-			Number *opr = con->car, *conv;
+			Number *opr = SCAST_NUMBER(con->car), *conv;
 			last = res;
 			if (res->type_ > opr->type_) res = res->gcd(conv = res->convert(opr));
 			else res = (conv = opr->convert(res))->gcd(opr);
@@ -244,7 +246,7 @@ class Lcm :public Opt{
 		Number *last;
 		for (; con; con = con->cdr){
 			if (con->car->type_>3 || con->car->type_<1) throw 0;
-			Number *opr = con->car, *conv;
+			Number *opr = SCAST_NUMBER(con->car), *conv;
 			last = res;
 			if (res->type_ > opr->type_) res = res->lcm(conv = res->convert(opr));
 			else res = (conv = opr->convert(res))->lcm(opr);
@@ -258,7 +260,7 @@ class Lcm :public Opt{
 class Expt :public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		Number *res = con->car, *opr = con->cdr->car, *last, *conv;
+		Number *res = SCAST_NUMBER(con->car), *opr = SCAST_NUMBER(con->cdr->car), *last, *conv;
 		if (res->type_<1 || res->type_>3) throw 0;
 		if (opr->type_<1 || opr->type_>3) throw 0;
 		last = res;
@@ -277,7 +279,7 @@ class Sqrt :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->sqt();
+		return SCAST_NUMBER(con->car)->sqt();
 	}
 };
 
@@ -286,7 +288,7 @@ class Numerator :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->num();
+		return SCAST_NUMBER(con->car)->num();
 	}
 };
 
@@ -295,7 +297,7 @@ class Denominator :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->den();
+		return SCAST_NUMBER(con->car)->den();
 	}
 };
 
@@ -304,7 +306,7 @@ class Floor :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->flo();
+		return SCAST_NUMBER(con->car)->flo();
 	}
 };
 
@@ -313,7 +315,7 @@ class Ceiling :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->cei();
+		return SCAST_NUMBER(con->car)->cei();
 	}
 };
 
@@ -322,7 +324,7 @@ class Truncate :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->tru();
+		return SCAST_NUMBER(con->car)->tru();
 	}
 };
 
@@ -331,7 +333,7 @@ class Round :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->rou();
+		return SCAST_NUMBER(con->car)->rou();
 	}
 };
 
@@ -340,7 +342,7 @@ class Toexact :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->toexact();
+		return SCAST_NUMBER(con->car)->toexact();
 	}
 };
 
@@ -349,17 +351,17 @@ class Toinexact :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->toinexact();
+		return SCAST_NUMBER(con->car)->toinexact();
 	}
 };
 
 class Max :public Opt {
 	Number *calc(Cons *con){
-		Number *res = con->car;
+		Number *res = SCAST_NUMBER(con->car);
 		Number *last;
 		for (; con; con = con->cdr){
 			if (con->car->type_>3 || con->car->type_<1) throw 0;	
-			Number *opr = con->car, *conv;
+			Number *opr = SCAST_NUMBER(con->car), *conv;
 			last = res;
 			if (res->type_ > opr->type_) res = res->maxi(conv = res->convert(opr));
 			else res = (conv = opr->convert(res))->maxi(opr);
@@ -372,11 +374,11 @@ class Max :public Opt {
 
 class Min :public Opt {
 	Number *calc(Cons *con){
-		Number *res = con->car;
+		Number *res = SCAST_NUMBER(con->car);
 		Number *last;
 		for (; con; con = con->cdr){
 			if (con->car->type_>3 || con->car->type_<1) throw 0;
-			Number *opr = con->car, *conv;
+			Number *opr = SCAST_NUMBER(con->car), *conv;
 			last = res;
 			if (res->type_ > opr->type_) res = res->mini(conv = res->convert(opr));
 			else res = (conv = opr->convert(res))->mini(opr);
@@ -392,7 +394,7 @@ class Sin :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->sinx();
+		return SCAST_NUMBER(con->car)->sinx();
 	}
 };
 
@@ -401,7 +403,7 @@ class Cos :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->cosx();
+		return SCAST_NUMBER(con->car)->cosx();
 	}
 };
 
@@ -410,7 +412,7 @@ class Tan :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->tanx();
+		return SCAST_NUMBER(con->car)->tanx();
 	}
 };
 
@@ -419,7 +421,7 @@ class Asin :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->asinx();
+		return SCAST_NUMBER(con->car)->asinx();
 	}
 };
 
@@ -428,7 +430,7 @@ class Acos :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->acosx();
+		return SCAST_NUMBER(con->car)->acosx();
 	}
 };
 
@@ -437,7 +439,7 @@ class Atan :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->atanx();
+		return SCAST_NUMBER(con->car)->atanx();
 	}
 };
 
@@ -446,7 +448,7 @@ class Exp :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->expx();
+		return SCAST_NUMBER(con->car)->expx();
 	}
 };
 
@@ -455,14 +457,14 @@ class Log :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->logx();
+		return SCAST_NUMBER(con->car)->logx();
 	}
 };
 
 class Make_rectangular :public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		Number *res = con->car, *opr = con->cdr->car, *last, *conv;
+		Number *res = SCAST_NUMBER(con->car), *opr = SCAST_NUMBER(con->cdr->car), *last, *conv;
 		if (res->type_<1 || res->type_>2) throw 0;
 		if (opr->type_<1 || opr->type_>2) throw 0;
 		last = res;
@@ -479,7 +481,7 @@ class Make_rectangular :public Opt{
 class Make_polar :public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		Number *res = con->car, *opr = con->cdr->car, *last, *conv;
+		Number *res = SCAST_NUMBER(con->car), *opr = SCAST_NUMBER(con->cdr->car), *last, *conv;
 		if (res->type_<1 || res->type_>2) throw 0;
 		if (opr->type_<1 || opr->type_>2) throw 0;
 		last = res;
@@ -498,7 +500,7 @@ class Realpart :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->realpart();
+		return SCAST_NUMBER(con->car)->realpart();
 	}
 };
 
@@ -507,7 +509,7 @@ class Imagpart :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->cdr != NULL) throw 0;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->imagpart();
+		return SCAST_NUMBER(con->car)->imagpart();
 	}
 };
 
@@ -515,7 +517,7 @@ class Magnitude :public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->mag();
+		return SCAST_NUMBER(con->car)->mag();
 	}
 };
 
@@ -523,6 +525,24 @@ class Angle :public Opt{
 	Number *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return con->car->ang();
+		return SCAST_NUMBER(con->car)->ang();
+	}
+};
+
+class Less :public Opt{
+	Boolean *calc(Cons *con){
+		Boolean *res, *last;
+		Number *first, *second, *conv;
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_<1 || con->cdr->car->type_>3) throw 0;
+			first = SCAST_NUMBER(con->car), second = SCAST_NUMBER(con->cdr->car);
+			if (first->type_>second->type_) res = first->less(conv = first->convert(second));
+			else res = (conv = second->convert(first))->less(second);
+			delete first, conv;
+			if (res->value_ == false) break;
+		}
+		delete second;
+		return res;
 	}
 };

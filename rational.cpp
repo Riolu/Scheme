@@ -360,6 +360,11 @@ Number *Rational::ang(){
 	return new Rational("0", "1");
 }
 
+Boolean *Rational::less(Number *number2){
+	Rational *tmp = SCAST_RATIONAL(number2);
+	if (numerator_*tmp->denominator_ < denominator_*tmp->numerator_) return new Boolean(true);
+	else return new Boolean(false);
+}
 
 void Rational::print(){
 	numerator_.print();

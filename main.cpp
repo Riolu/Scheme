@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
 	try {
-		for (Number *res;;) {
+		for (Datatype *res;;) {
 			res = calc_exp();
 			res->print();
 			cout << endl;

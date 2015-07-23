@@ -565,6 +565,10 @@ Number *Complex::ang(){
 	return result;
 }
 
+Boolean *Complex::less(Number *number2){
+	return NULL;
+}
+
 void Complex::print(){
 	real_->print();
 	if (imag_->type_ == RATIONAL){

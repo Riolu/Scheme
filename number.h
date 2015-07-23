@@ -1,14 +1,10 @@
 #pragma once
-
+#include "datatype.h"
+#include "boolean.h"
 #define SCAST_NUMBER(x) static_cast<Number*>(x)
 
-class Number {
+class Number :public Datatype{
 public:
-	enum{
-		RATIONAL = 1,
-		FLOAT = 2,
-		COMPLEX = 3
-	} type_;
 	Number(){}
 	virtual ~Number(){}
 	virtual Number *convert(Number *number2) = 0;
@@ -48,5 +44,7 @@ public:
 	virtual Number *ang() = 0;
 	virtual Number *realpart() = 0;
 	virtual Number *imagpart() = 0;
+	virtual Boolean *less(Number *number2) = 0;
+	
 	virtual void print() = 0;
 };

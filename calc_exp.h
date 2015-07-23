@@ -3,4 +3,5 @@
 #include "rational.h"
 #include "complex.h"
 
-Number *calc_exp();
+//Number *calc_exp();
+Datatype *calc_exp();

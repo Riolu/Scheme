@@ -71,6 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="boolean.cpp" />
     <ClCompile Include="calc_exp.cpp" />
     <ClCompile Include="complex.cpp" />
     <ClCompile Include="float.cpp" />
@@ -79,9 +80,11 @@
     <ClCompile Include="rational.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="boolean.h" />
     <ClInclude Include="calc_exp.h" />
     <ClInclude Include="compare.h" />
     <ClInclude Include="complex.h" />
+    <ClInclude Include="datatype.h" />
     <ClInclude Include="float.h" />
     <ClInclude Include="long_int.h" />
     <ClInclude Include="next_token.h" />

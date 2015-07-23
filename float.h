@@ -45,7 +45,10 @@ public:
 	virtual Number *imagpart();
 	virtual Number *mag();
 	virtual Number *ang();
+	virtual Boolean *less(Number *number2);
+
 	virtual void print();
 	static Float *from_string(const char *expression);
+
 	double number_;
 };
