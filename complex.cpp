@@ -458,7 +458,8 @@ Number *Complex::asinx(){
 	Float *real1 = SCAST_FLOAT(f->convert(real_));
 	Float *imag1 = SCAST_FLOAT(f->convert(imag_));
 	complex<double> a(real1->number_, imag1->number_);
-	complex<double> res = asin(a);
+	complex<double> i(0, 1), one(1, 0);
+	complex<double> res = (-i)*log(i*a + sqrt(one - pow(a, 2)));
 	Float *real = new Float(res.real()), *imag = new Float(res.imag());
 	if (real->number_ == -0) real->number_ = 0;
 	Complex *result = new Complex(real, imag);
@@ -467,15 +468,10 @@ Number *Complex::asinx(){
 }
 
 Number *Complex::acosx(){
-	Float *f = new Float();
-	Float *real1 = SCAST_FLOAT(f->convert(real_));
-	Float *imag1 = SCAST_FLOAT(f->convert(imag_));
-	complex<double> a(real1->number_, imag1->number_);
-	complex<double> res = acos(a);
-	Float *real = new Float(res.real()), *imag = new Float(res.imag());
-	if (real->number_ == -0) real->number_ = 0;
-	Complex *result = new Complex(real, imag);
-	delete f, real1, imag1, real, imag;
+	Complex *arcsin = SCAST_COMPLEX(this->asinx());
+	Complex *halfpi = new Complex("1.57079632679489661923", "0");
+	Complex *result = SCAST_COMPLEX(halfpi->sub(arcsin));
+	delete arcsin, halfpi;
 	return result;
 }
 
@@ -484,7 +480,8 @@ Number *Complex::atanx(){
 	Float *real1 = SCAST_FLOAT(f->convert(real_));
 	Float *imag1 = SCAST_FLOAT(f->convert(imag_));
 	complex<double> a(real1->number_, imag1->number_);
-	complex<double> res = atan(a);
+	complex<double> i(0,1), one(1,0), two(2,0);
+	complex<double> res = (log(one + i*a) - log(one - i*a)) / (two*i);
 	Float *real = new Float(res.real()), *imag = new Float(res.imag());
 	if (real->number_ == -0) real->number_ = 0;
 	Complex *result = new Complex(real, imag);
