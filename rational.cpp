@@ -366,6 +366,60 @@ Boolean *Rational::less(Number *number2){
 	else return new Boolean(false);
 }
 
+Boolean *Rational::lessequal(Number *number2){
+	Rational *tmp = SCAST_RATIONAL(number2);
+	if (numerator_*tmp->denominator_ < denominator_*tmp->numerator_ || numerator_*tmp->denominator_ == denominator_*tmp->numerator_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::greater(Number *number2){
+	Rational *tmp = SCAST_RATIONAL(number2);
+	if (denominator_*tmp->numerator_ < numerator_*tmp->denominator_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::greaterequal(Number *number2){
+	Rational *tmp = SCAST_RATIONAL(number2);
+	if (denominator_*tmp->numerator_ < numerator_*tmp->denominator_ || denominator_*tmp->numerator_ == numerator_*tmp->denominator_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isZero(){
+	if (numerator_.number_ == "0") return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isNegative(){
+	if (numerator_.number_[0] == '-') return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isPositive(){
+	if (numerator_.number_[0] != '-' && numerator_.number_[0]!='0') return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isOdd(){
+	if (denominator_.number_ != "1") return NULL;
+	if (numerator_%LongInt("2") == LongInt("1") || numerator_%LongInt("2") == LongInt("-1")) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isEven(){
+	if (denominator_.number_ != "1") return NULL;
+	if (numerator_%LongInt("2") == LongInt("0")) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isInteger(){
+	if (denominator_.number_ == "1") return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isRational(){
+	return new Boolean(true);
+}
+
 void Rational::print(){
 	numerator_.print();
 	if (denominator_ != LongInt("1")){

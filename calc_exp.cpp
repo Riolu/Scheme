@@ -51,6 +51,16 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "magnitude") == 0) opt = new Magnitude();
 		else if (strcmp(tk1, "angle") == 0) opt = new Angle();
 		else if (strcmp(tk1, "<") == 0) opt = new Less();
+		else if (strcmp(tk1, "<=") == 0) opt = new Lessequal();
+		else if (strcmp(tk1, ">") == 0) opt = new Greater();
+		else if (strcmp(tk1, ">=") == 0) opt = new Greaterequal();
+		else if (strcmp(tk1, "zero?") == 0) opt = new IsZero();
+		else if (strcmp(tk1, "negative?") == 0) opt = new IsNegative();
+		else if (strcmp(tk1, "positive?") == 0) opt = new IsPositive();
+		else if (strcmp(tk1, "odd?") == 0) opt = new IsOdd();
+		else if (strcmp(tk1, "even?") == 0) opt = new IsEven();
+		else if (strcmp(tk1, "integer?") == 0) opt = new IsInteger();
+		else if (strcmp(tk1, "rational?") == 0) opt = new IsRational();
 
 		else throw 0;
         while ((val = calc_exp()))

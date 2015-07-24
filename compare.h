@@ -531,18 +531,132 @@ class Angle :public Opt{
 
 class Less :public Opt{
 	Boolean *calc(Cons *con){
-		Boolean *res, *last;
+		Boolean *res = new Boolean(), *last;
 		Number *first, *second, *conv;
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
 		for (; con->cdr; con = con->cdr){
 			if (con->cdr->car->type_<1 || con->cdr->car->type_>3) throw 0;
 			first = SCAST_NUMBER(con->car), second = SCAST_NUMBER(con->cdr->car);
+			last = res;
 			if (first->type_>second->type_) res = first->less(conv = first->convert(second));
 			else res = (conv = second->convert(first))->less(second);
-			delete first, conv;
+			delete last;
+			delete conv;
 			if (res->value_ == false) break;
 		}
-		delete second;
 		return res;
+	}
+};
+
+class Lessequal :public Opt{
+	Boolean *calc(Cons *con){
+		Boolean *res=new Boolean(), *last;
+		Number *first, *second, *conv;
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_<1 || con->cdr->car->type_>3) throw 0;
+			first = SCAST_NUMBER(con->car), second = SCAST_NUMBER(con->cdr->car);
+			last = res;
+			if (first->type_>second->type_) res = first->lessequal(conv = first->convert(second));
+			else res = (conv = second->convert(first))->lessequal(second);
+			delete last;
+			delete conv;
+			if (res->value_ == false) break;
+		}
+		return res;
+	}
+};
+
+class Greater :public Opt{
+	Boolean *calc(Cons *con){
+		Boolean *res = new Boolean(), *last;
+		Number *first, *second, *conv;
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_<1 || con->cdr->car->type_>3) throw 0;
+			first = SCAST_NUMBER(con->car), second = SCAST_NUMBER(con->cdr->car);
+			last = res;
+			if (first->type_>second->type_) res = first->greater(conv = first->convert(second));
+			else res = (conv = second->convert(first))->greater(second);
+			delete last;
+			delete conv;
+			if (res->value_ == false) break;
+		}
+		return res;
+	}
+};
+
+class Greaterequal :public Opt{
+	Boolean *calc(Cons *con){
+		Boolean *res = new Boolean(), *last;
+		Number *first, *second, *conv;
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_<1 || con->cdr->car->type_>3) throw 0;
+			first = SCAST_NUMBER(con->car), second = SCAST_NUMBER(con->cdr->car);
+			last = res;
+			if (first->type_>second->type_) res = first->greaterequal(conv = first->convert(second));
+			else res = (conv = second->convert(first))->greaterequal(second);
+			delete last;
+			delete conv;
+			if (res->value_ == false) break;
+		}
+		return res;
+	}
+};
+
+class IsZero :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isZero();
+	}
+};
+
+class IsNegative :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isNegative();
+	}
+};
+
+class IsPositive :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isPositive();
+	}
+};
+
+class IsOdd :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isOdd();
+	}
+};
+
+class IsEven :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isEven();
+	}
+};
+
+class IsInteger :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isInteger();
+	}
+};
+
+class IsRational :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isRational();
 	}
 };

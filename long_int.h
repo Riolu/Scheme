@@ -14,6 +14,7 @@ public:
 	operator double();
 	bool operator!=(const LongInt &long_int2) const;
 	bool operator<(const LongInt &long_int2) const;
+	bool operator==(const LongInt &long_int2) const;
 	LongInt &operator=(const LongInt &long_int2);
 	LongInt operator+(const LongInt &long_int2) const;
 	LongInt operator-(const LongInt &long_int2) const;

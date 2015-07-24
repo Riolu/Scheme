@@ -54,6 +54,10 @@ bool LongInt::operator<(const LongInt &long_int2) const{
 	if (number_[0] == '-'&&long_int2.number_[0] != '-') return true; //一负一正
 }
 
+bool LongInt::operator==(const LongInt &long_int2) const{
+	return number_ == long_int2.number_;
+}
+
 LongInt &LongInt::operator=(const LongInt &long_int2){
 	number_ = long_int2.number_;
 	return *this;

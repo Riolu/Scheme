@@ -330,6 +330,60 @@ Boolean *Float::less(Number *number2){
 	else return new Boolean(false);
 }
 
+Boolean *Float::lessequal(Number *number2){
+	Float *tmp = SCAST_FLOAT(number2);
+	if (number_ < tmp->number_ || number_ == tmp->number_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::greater(Number *number2){
+	Float *tmp = SCAST_FLOAT(number2);
+	if (number_ > tmp->number_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::greaterequal(Number *number2){
+	Float *tmp = SCAST_FLOAT(number2);
+	if (number_ > tmp->number_ || number_ == tmp->number_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isZero(){
+	if (number_ == 0) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isNegative(){
+	if (number_ < 0) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isPositive(){
+	if (number_ > 0) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isOdd(){
+	if (number_ != trunc(number_)) return NULL;
+	if (fmod(number_, 2) == 1 || fmod(number_, 2) == -1) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isEven(){
+	if (number_ != trunc(number_)) return NULL;
+	if (fmod(number_, 2) == 0) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isInteger(){
+	if (number_ == trunc(number_)) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Float::isRational(){
+	return new Boolean(true);
+}
+
 void Float::print(){
 	if (trunc(number_) == number_ && fabs(number_)< 1e18){ printf("%.18g", number_); cout << ".0"; }
 	else printf("%.18g", number_);

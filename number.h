@@ -45,6 +45,16 @@ public:
 	virtual Number *realpart() = 0;
 	virtual Number *imagpart() = 0;
 	virtual Boolean *less(Number *number2) = 0;
-	
+	virtual Boolean *lessequal(Number *number2) = 0;
+	virtual Boolean *greater(Number *number2) = 0;
+	virtual Boolean *greaterequal(Number *number2) = 0;
+	virtual Boolean *isZero() = 0;
+	virtual Boolean *isNegative() = 0;
+	virtual Boolean *isPositive() = 0;
+	virtual Boolean *isOdd() = 0;
+	virtual Boolean *isEven() = 0;
+	virtual Boolean *isInteger() = 0;
+	virtual Boolean *isRational() = 0;
+
 	virtual void print() = 0;
 };

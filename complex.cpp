@@ -458,21 +458,37 @@ Number *Complex::asinx(){
 	Float *real1 = SCAST_FLOAT(f->convert(real_));
 	Float *imag1 = SCAST_FLOAT(f->convert(imag_));
 	complex<double> a(real1->number_, imag1->number_);
-	complex<double> i(0, 1), one(1, 0);
-	complex<double> res = (-i)*log(i*a + sqrt(one - pow(a, 2)));
+	complex<double> res = asin(a);
 	Float *real = new Float(res.real()), *imag = new Float(res.imag());
 	if (real->number_ == -0) real->number_ = 0;
 	Complex *result = new Complex(real, imag);
 	delete f, real1, imag1, real, imag;
 	return result;
+//	complex<double> i(0, 1), one(1, 0);
+//	complex<double> res = (-i)*log(i*a + sqrt(one - pow(a, 2)));
+//	Float *real = new Float(res.real()), *imag = new Float(res.imag());
+//	if (real->number_ == -0) real->number_ = 0;
+//	Complex *result = new Complex(real, imag);
+//	delete f, real1, imag1, real, imag;
+//	return result;
 }
 
 Number *Complex::acosx(){
-	Complex *arcsin = SCAST_COMPLEX(this->asinx());
-	Complex *halfpi = new Complex("1.57079632679489661923", "0");
-	Complex *result = SCAST_COMPLEX(halfpi->sub(arcsin));
-	delete arcsin, halfpi;
+    Float *f = new Float();
+	Float *real1 = SCAST_FLOAT(f->convert(real_));
+	Float *imag1 = SCAST_FLOAT(f->convert(imag_));
+	complex<double> a(real1->number_, imag1->number_);
+	complex<double> res = acos(a);
+	Float *real = new Float(res.real()), *imag = new Float(res.imag());
+	if (real->number_ == -0) real->number_ = 0;
+	Complex *result = new Complex(real, imag);
+	delete f, real1, imag1, real, imag;
 	return result;
+//	Complex *arcsin = SCAST_COMPLEX(this->asinx());
+//	Complex *halfpi = new Complex("1.57079632679489661923", "0");
+//	Complex *result = SCAST_COMPLEX(halfpi->sub(arcsin));
+//	delete arcsin, halfpi;
+//	return result;
 }
 
 Number *Complex::atanx(){
@@ -480,13 +496,19 @@ Number *Complex::atanx(){
 	Float *real1 = SCAST_FLOAT(f->convert(real_));
 	Float *imag1 = SCAST_FLOAT(f->convert(imag_));
 	complex<double> a(real1->number_, imag1->number_);
-	complex<double> i(0,1), one(1,0), two(2,0);
-	complex<double> res = (log(one + i*a) - log(one - i*a)) / (two*i);
+    complex<double> res = atan(a);
 	Float *real = new Float(res.real()), *imag = new Float(res.imag());
 	if (real->number_ == -0) real->number_ = 0;
 	Complex *result = new Complex(real, imag);
 	delete f, real1, imag1, real, imag;
 	return result;
+//	complex<double> i(0,1), one(1,0), two(2,0);
+//	complex<double> res = (log(one + i*a) - log(one - i*a)) / (two*i);
+//	Float *real = new Float(res.real()), *imag = new Float(res.imag());
+//	if (real->number_ == -0) real->number_ = 0;
+//	Complex *result = new Complex(real, imag);
+//	delete f, real1, imag1, real, imag;
+//	return result;
 }
 
 Number *Complex::expx(){
@@ -569,6 +591,86 @@ Boolean *Complex::less(Number *number2){
 	return NULL;
 }
 
+Boolean *Complex::lessequal(Number *number2){
+	return NULL;
+}
+
+Boolean *Complex::greater(Number *number2){
+	return NULL;
+}
+
+Boolean *Complex::greaterequal(Number *number2){
+	return NULL;
+}
+
+Boolean *Complex::isZero(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return real_->isZero();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return real_->isZero();
+	}
+	return NULL;
+}
+
+Boolean *Complex::isNegative(){
+	return NULL;
+}
+
+Boolean *Complex::isPositive(){
+	return NULL;
+}
+
+Boolean *Complex::isOdd(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return real_->isOdd();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return real_->isOdd();
+	}
+	return NULL;
+}
+
+Boolean *Complex::isEven(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return real_->isEven();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return real_->isEven();
+	}
+	return NULL;
+}
+
+Boolean *Complex::isInteger(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return real_->isInteger();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return real_->isInteger();
+	}
+	return new Boolean(false);
+}
+
+Boolean *Complex::isRational(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return real_->isRational();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return real_->isRational();
+	}
+	return new Boolean(false);
+}
+
 void Complex::print(){
 	real_->print();
 	if (imag_->type_ == RATIONAL){
@@ -579,7 +681,7 @@ void Complex::print(){
 	}
 	if (imag_->type_ == FLOAT){
 		Float *tmp = SCAST_FLOAT(imag_);
-//		if (abs(tmp->number_)<1e-300){ printf("\n"); return; } //精度可能存在问题
+		if (fabs(tmp->number_) == 0) return;
 		if (tmp->number_ >= 0) printf("+");
 	}
 	imag_->print();

@@ -50,6 +50,16 @@ public:
 	virtual Number *mag();
 	virtual Number *ang();
 	virtual Boolean *less(Number *number2);
+	virtual Boolean *lessequal(Number *number2);
+	virtual Boolean *greater(Number *number2);
+	virtual Boolean *greaterequal(Number *number2);
+	virtual Boolean *isZero();
+	virtual Boolean *isNegative();
+	virtual Boolean *isPositive();
+	virtual Boolean *isOdd();
+	virtual Boolean *isEven();
+	virtual Boolean *isInteger();
+	virtual Boolean *isRational();
 
 	virtual void print();
 	static Rational *from_string(const char *expression_in_char);
