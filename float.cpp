@@ -384,6 +384,18 @@ Boolean *Float::isRational(){
 	return new Boolean(true);
 }
 
+Boolean *Float::isReal(){
+	return new Boolean(true);
+}
+
+Boolean *Float::isComplex(){
+	return new Boolean(true);
+}
+
+Boolean *Float::isNumber(){
+	return new Boolean(true);
+}
+
 void Float::print(){
 	if (trunc(number_) == number_ && fabs(number_)< 1e18){ printf("%.18g", number_); cout << ".0"; }
 	else printf("%.18g", number_);

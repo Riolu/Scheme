@@ -8,6 +8,26 @@ Boolean::Boolean(bool value) :value_(value){
 
 Boolean::~Boolean(){}
 
+Boolean *Boolean::isInteger(){
+	return new Boolean(false);
+}
+
+Boolean *Boolean::isRational(){
+	return new Boolean(false);
+}
+
+Boolean *Boolean::isReal(){
+	return new Boolean(false);
+}
+
+Boolean *Boolean::isComplex(){
+	return new Boolean(false);
+}
+
+Boolean *Boolean::isNumber(){
+	return new Boolean(false);
+}
+
 void Boolean::print(){
 	if (value_) printf("#t");
 	else printf("#f");

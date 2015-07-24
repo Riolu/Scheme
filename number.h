@@ -55,6 +55,9 @@ public:
 	virtual Boolean *isEven() = 0;
 	virtual Boolean *isInteger() = 0;
 	virtual Boolean *isRational() = 0;
+	virtual Boolean *isReal() = 0;
+	virtual Boolean *isComplex() = 0;
+	virtual Boolean *isNumber() = 0;
 
 	virtual void print() = 0;
 };

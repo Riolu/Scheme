@@ -12,6 +12,7 @@
 #define SCAST_NUMBER(x) static_cast<Number*>(x)
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
+#define SCAST_BOOLEAN(x) static_cast<Boolean*>(x)
 
 class Add : public Opt {
     /* Use the lowest level type */
@@ -648,15 +649,54 @@ class IsEven :public Opt{
 class IsInteger :public Opt{
 	Boolean *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return SCAST_NUMBER(con->car)->isInteger();
+		if (con->car->type_ >= 1 && con->car->type_ <= 3)
+			return SCAST_NUMBER(con->car)->isInteger();
+		else if (con->car->type_ == 4)
+			return SCAST_BOOLEAN(con->car)->isInteger();
+		else throw 0;
 	}
 };
 
 class IsRational :public Opt{
 	Boolean *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return SCAST_NUMBER(con->car)->isRational();
+		if (con->car->type_ >= 1 && con->car->type_ <= 3)
+			return SCAST_NUMBER(con->car)->isRational();
+		else if (con->car->type_ == 4)
+			return SCAST_BOOLEAN(con->car)->isRational();
+		else throw 0;
+	}
+};
+
+class IsReal :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_>=1 && con->car->type_<=3) 
+			return SCAST_NUMBER(con->car)->isReal();
+		else if (con->car->type_ == 4)
+			return SCAST_BOOLEAN(con->car)->isReal();
+		else throw 0;
+	}
+};
+
+class IsComplex :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ >= 1 && con->car->type_ <= 3)
+			return SCAST_NUMBER(con->car)->isComplex();
+		else if (con->car->type_ == 4)
+			return SCAST_BOOLEAN(con->car)->isComplex();
+		else throw 0;
+	}
+};
+
+class IsNumber :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ >= 1 && con->car->type_ <= 3)
+			return SCAST_NUMBER(con->car)->isNumber();
+		else if (con->car->type_ == 4)
+			return SCAST_BOOLEAN(con->car)->isNumber();
+		else throw 0;
 	}
 };

@@ -420,6 +420,18 @@ Boolean *Rational::isRational(){
 	return new Boolean(true);
 }
 
+Boolean *Rational::isReal(){
+	return new Boolean(true);
+}
+
+Boolean *Rational::isComplex(){
+	return new Boolean(true);
+}
+
+Boolean *Rational::isNumber(){
+	return new Boolean(true);
+}
+
 void Rational::print(){
 	numerator_.print();
 	if (denominator_ != LongInt("1")){

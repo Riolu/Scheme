@@ -671,6 +671,26 @@ Boolean *Complex::isRational(){
 	return new Boolean(false);
 }
 
+Boolean *Complex::isReal(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return real_->isReal();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return real_->isReal();
+	}
+	return new Boolean(false);
+}
+
+Boolean *Complex::isComplex(){
+	return new Boolean(true);
+}
+
+Boolean *Complex::isNumber(){
+	return new Boolean(true);
+}
+
 void Complex::print(){
 	real_->print();
 	if (imag_->type_ == RATIONAL){
