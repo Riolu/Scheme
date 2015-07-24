@@ -63,6 +63,8 @@ public:
 	virtual Boolean *isReal();
 	virtual Boolean *isComplex();
 	virtual Boolean *isNumber();
+	virtual Boolean *isExact();
+	virtual Boolean *isInexact();
 
 	virtual void print();
 	static Rational *from_string(const char *expression_in_char);

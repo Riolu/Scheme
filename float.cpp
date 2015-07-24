@@ -396,6 +396,14 @@ Boolean *Float::isNumber(){
 	return new Boolean(true);
 }
 
+Boolean *Float::isExact(){
+	return new Boolean(false);
+}
+
+Boolean *Float::isInexact(){
+	return new Boolean(true);
+}
+
 void Float::print(){
 	if (trunc(number_) == number_ && fabs(number_)< 1e18){ printf("%.18g", number_); cout << ".0"; }
 	else printf("%.18g", number_);

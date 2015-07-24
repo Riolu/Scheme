@@ -700,3 +700,19 @@ class IsNumber :public Opt{
 		else throw 0;
 	}
 };
+
+class IsExact :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isExact();
+	}
+};
+
+class IsInexact :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->isInexact();
+	}
+};

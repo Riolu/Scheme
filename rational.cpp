@@ -432,6 +432,14 @@ Boolean *Rational::isNumber(){
 	return new Boolean(true);
 }
 
+Boolean *Rational::isExact(){
+	return new Boolean(true);
+}
+
+Boolean *Rational::isInexact(){
+	return new Boolean(false);
+}
+
 void Rational::print(){
 	numerator_.print();
 	if (denominator_ != LongInt("1")){

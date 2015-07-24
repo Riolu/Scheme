@@ -691,6 +691,16 @@ Boolean *Complex::isNumber(){
 	return new Boolean(true);
 }
 
+Boolean *Complex::isExact(){
+	if (real_->type_ == RATIONAL) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Complex::isInexact(){
+	if (real_->type_ == FLOAT) return new Boolean(true);
+	else return new Boolean(false);
+}
+
 void Complex::print(){
 	real_->print();
 	if (imag_->type_ == RATIONAL){

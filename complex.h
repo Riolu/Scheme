@@ -66,6 +66,8 @@ public:
 	virtual Boolean *isReal();
 	virtual Boolean *isComplex();
 	virtual Boolean *isNumber();
+	virtual Boolean *isExact();
+	virtual Boolean *isInexact();
 
 	virtual void print();
 	static Complex *from_string(const char *expression);

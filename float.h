@@ -59,6 +59,8 @@ public:
 	virtual Boolean *isReal();
 	virtual Boolean *isComplex();
 	virtual Boolean *isNumber();
+	virtual Boolean *isExact();
+	virtual Boolean *isInexact();
 
 	virtual void print();
 	static Float *from_string(const char *expression);
