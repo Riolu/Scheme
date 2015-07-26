@@ -44,6 +44,7 @@ public:
 	virtual Number *asinx();
 	virtual Number *acosx();
 	virtual Number *atanx();
+	virtual Number *atanxy(Number *number2);
 	virtual Number *expx();
 	virtual Number *logx();
 	virtual Number *makerectangular(Number *number2);

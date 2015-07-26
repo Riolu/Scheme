@@ -274,6 +274,11 @@ Number *Float::atanx(){
 	return new Float(atan(number_));
 }
 
+Number *Float::atanxy(Number *number2){
+	Float *tmp = SCAST_FLOAT(number2);
+	return new Float(atan(number_/tmp->number_));
+}
+
 Number *Float::expx(){
 	return new Float(exp(number_));
 }

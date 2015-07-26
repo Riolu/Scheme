@@ -309,6 +309,16 @@ Number *Rational::atanx(){
 	return result;
 }
 
+Number *Rational::atanxy(Number *number2){
+	Rational *tmp = SCAST_RATIONAL(number2);
+	Float *f = new Float();
+	Float *tmpx = SCAST_FLOAT(f->convert(this));
+	Float *tmpy = SCAST_FLOAT(f->convert(tmp));
+	Number *result = tmpx->atanxy(tmpy);
+	delete f, tmpx, tmpy;
+	return result;
+}
+
 Number *Rational::expx(){
 	Float *f = new Float();
 	Float *tmp = SCAST_FLOAT(f->convert(this));

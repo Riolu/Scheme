@@ -437,10 +437,19 @@ class Acos :public Opt{
 
 class Atan :public Opt{
 	Number *calc(Cons *con){
-		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->cdr != NULL) throw 0;
-		if (con->car->type_<1 || con->car->type_>3) throw 0;
-		return SCAST_NUMBER(con->car)->atanx();
+		if (con->cdr == NULL){
+			if (con->car->type_<1 || con->car->type_>3) throw 0;
+			return SCAST_NUMBER(con->car)->atanx();
+		}
+		else{
+			assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+			Number *first = SCAST_NUMBER(con->car), *second = SCAST_NUMBER(con->cdr->car), *conv, *res;
+			if (first->type_ < 1 || first->type_>3 || second->type_<1 || second->type_>3) throw 0;
+			if (first->type_>second->type_) res = first->atanxy(conv = first->convert(second));
+			else res = (conv = second->convert(first))->atanxy(second);
+			delete conv;
+			return res;
+		}
 	}
 };
 

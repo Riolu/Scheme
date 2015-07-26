@@ -36,6 +36,7 @@ public:
 	virtual Number *asinx() = 0;
 	virtual Number *acosx() = 0;
 	virtual Number *atanx() = 0;
+	virtual Number *atanxy(Number *number2) = 0;
 	virtual Number *expx() = 0;
 	virtual Number *logx() = 0;
 	virtual Number *makerectangular(Number *number2) = 0;

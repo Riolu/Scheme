@@ -511,6 +511,10 @@ Number *Complex::atanx(){
 //	return result;
 }
 
+Number *Complex::atanxy(Number *number2){
+	return NULL;
+}
+
 Number *Complex::expx(){
 	Float *f = new Float();
 	Float *real1 = SCAST_FLOAT(f->convert(real_));
