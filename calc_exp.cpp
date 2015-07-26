@@ -64,8 +64,11 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "real?") == 0) opt = new IsReal();
 		else if (strcmp(tk1, "complex?") == 0) opt = new IsComplex();
 		else if (strcmp(tk1, "number?") == 0) opt = new IsNumber();
+		else if (strcmp(tk1, "char?") == 0) opt = new IsChar();
 		else if (strcmp(tk1, "exact?") == 0) opt = new IsExact();
 		else if (strcmp(tk1, "inexact?") == 0) opt = new IsInexact();
+		else if (strcmp(tk1, "char=?") == 0) opt = new IsCharEqual();
+		else if (strcmp(tk1, "char-ci=?") == 0) opt = new IsCharCiEqual();
 
 		else throw 0;
         while ((val = calc_exp()))
@@ -90,6 +93,8 @@ Datatype *calc_exp(){
 		if(!res) {res = Float::from_string(tk0);}
 		if(!res) { res = Complex::from_string(tk0);}
 		if (!res) { res = Boolean::from_string(tk0); }
+		if (!res) { res = Character::from_string(tk0); }
+
 		if(res==NULL){throw 0;}
     }
     return res;

@@ -442,6 +442,10 @@ Boolean *Rational::isNumber(){
 	return new Boolean(true);
 }
 
+Boolean *Rational::isChar(){
+	return new Boolean(false);
+}
+
 Boolean *Rational::isExact(){
 	return new Boolean(true);
 }

@@ -59,6 +59,7 @@ public:
 	virtual Boolean *isReal() = 0;
 	virtual Boolean *isComplex() = 0;
 	virtual Boolean *isNumber() = 0;
+	virtual Boolean *isChar() = 0;
 	virtual Boolean *isExact() = 0;
 	virtual Boolean *isInexact() = 0;
 

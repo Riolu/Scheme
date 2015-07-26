@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <sstream>
 #include <complex>
-#include <iostream> 
+#include <iostream>
 using namespace std;
 
 #define ABS(x) ((x)<0?(-(x)):(x))
@@ -102,13 +102,13 @@ Number *Float::abs(){
 	return new Float (fabs(number_));
 }
 
-Number *Float::quo(Number *number2){ 
+Number *Float::quo(Number *number2){
 	Float *tmp = SCAST_FLOAT(number2);
 	if (number_ != trunc(number_) || tmp->number_ != trunc(tmp->number_)) return NULL;
 	return new Float(trunc(number_ / tmp->number_));
 }
 
-Number *Float::rem(Number *number2){ 
+Number *Float::rem(Number *number2){
 	Float *tmp = SCAST_FLOAT(number2);
 	if (number_ != trunc(number_) || tmp->number_ != trunc(tmp->number_)) return NULL;
 	return new Float(fmod(number_, tmp->number_));
@@ -161,7 +161,7 @@ Number *Float::expt(Number *number2){
 
 Number *Float::sqt(){
 	double ans = sqrt(number_);
-	if (ans != ans){ //special cases like -1 
+	if (ans != ans){ //special cases like -1
 		Complex *c = new Complex();
 		Complex *c1 = SCAST_COMPLEX(c->convert(this));
 		Complex *result = SCAST_COMPLEX(c1->sqt());
@@ -248,7 +248,7 @@ Number *Float::tanx(){
 
 Number *Float::asinx(){
 	double ans = asin(number_);
-	if (ans != ans){ 
+	if (ans != ans){
 		Complex *c = new Complex();
 		Complex *c1 = SCAST_COMPLEX(c->convert(this));
 		Complex *result = SCAST_COMPLEX(c1->asinx());
@@ -260,7 +260,7 @@ Number *Float::asinx(){
 
 Number *Float::acosx(){
 	double ans = acos(number_);
-	if (ans != ans){ 
+	if (ans != ans){
 		Complex *c = new Complex();
 		Complex *c1 = SCAST_COMPLEX(c->convert(this));
 		Complex *result = SCAST_COMPLEX(c1->acosx());
@@ -399,6 +399,10 @@ Boolean *Float::isComplex(){
 
 Boolean *Float::isNumber(){
 	return new Boolean(true);
+}
+
+Boolean *Float::isChar(){
+	return new Boolean(false);
 }
 
 Boolean *Float::isExact(){

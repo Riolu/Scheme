@@ -4,6 +4,7 @@
 #include "rational.h"
 #include "complex.h"
 #include "boolean.h"
+#include "character.h"
 #include <cmath>
 #include <iomanip>
 #include <sstream>
@@ -13,6 +14,7 @@
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 #define SCAST_BOOLEAN(x) static_cast<Boolean*>(x)
+#define SCAST_CHARACTER(x) static_cast<Character*>(x)
 
 class Add : public Opt {
     /* Use the lowest level type */
@@ -443,8 +445,8 @@ class Atan :public Opt{
 		}
 		else{
 			assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+			if (con->car->type_ < 1 || con->car->type_>3 || con->cdr->car->type_<1 || con->cdr->car->type_>3) throw 0;
 			Number *first = SCAST_NUMBER(con->car), *second = SCAST_NUMBER(con->cdr->car), *conv, *res;
-			if (first->type_ < 1 || first->type_>3 || second->type_<1 || second->type_>3) throw 0;
 			if (first->type_>second->type_) res = first->atanxy(conv = first->convert(second));
 			else res = (conv = second->convert(first))->atanxy(second);
 			delete conv;
@@ -656,57 +658,50 @@ class IsEven :public Opt{
 };
 
 class IsInteger :public Opt{
-	Boolean *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_ >= 1 && con->car->type_ <= 3)
-			return SCAST_NUMBER(con->car)->isInteger();
-		else if (con->car->type_ == 4)
-			return SCAST_BOOLEAN(con->car)->isInteger();
-		else throw 0;
+		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		return (con->car)->isInteger();
 	}
 };
 
 class IsRational :public Opt{
-	Boolean *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_ >= 1 && con->car->type_ <= 3)
-			return SCAST_NUMBER(con->car)->isRational();
-		else if (con->car->type_ == 4)
-			return SCAST_BOOLEAN(con->car)->isRational();
-		else throw 0;
+		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		return (con->car)->isRational();
 	}
 };
 
 class IsReal :public Opt{
-	Boolean *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_>=1 && con->car->type_<=3) 
-			return SCAST_NUMBER(con->car)->isReal();
-		else if (con->car->type_ == 4)
-			return SCAST_BOOLEAN(con->car)->isReal();
-		else throw 0;
+		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		return (con->car)->isReal();
 	}
 };
 
 class IsComplex :public Opt{
-	Boolean *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_ >= 1 && con->car->type_ <= 3)
-			return SCAST_NUMBER(con->car)->isComplex();
-		else if (con->car->type_ == 4)
-			return SCAST_BOOLEAN(con->car)->isComplex();
-		else throw 0;
+		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		return (con->car)->isComplex();
 	}
 };
 
 class IsNumber :public Opt{
-	Boolean *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_ >= 1 && con->car->type_ <= 3)
-			return SCAST_NUMBER(con->car)->isNumber();
-		else if (con->car->type_ == 4)
-			return SCAST_BOOLEAN(con->car)->isNumber();
-		else throw 0;
+		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		return (con->car)->isNumber();
+	}
+};
+
+class IsChar :public Opt{
+	Datatype *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		return (con->car)->isChar();
 	}
 };
 
@@ -723,5 +718,23 @@ class IsInexact :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->car->type_<1 || con->car->type_>3) throw 0;
 		return SCAST_NUMBER(con->car)->isInexact();
+	}
+};
+
+class IsCharEqual :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
+		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+		return first->isCharEqual(second);
+	}
+};
+
+class IsCharCiEqual :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
+		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+		return first->isCharCiEqual(second);
 	}
 };

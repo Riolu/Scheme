@@ -695,6 +695,10 @@ Boolean *Complex::isNumber(){
 	return new Boolean(true);
 }
 
+Boolean *Complex::isChar(){
+	return new Boolean(false);
+}
+
 Boolean *Complex::isExact(){
 	if (real_->type_ == RATIONAL) return new Boolean(true);
 	else return new Boolean(false);

@@ -73,6 +73,7 @@
   <ItemGroup>
     <ClCompile Include="boolean.cpp" />
     <ClCompile Include="calc_exp.cpp" />
+    <ClCompile Include="character.cpp" />
     <ClCompile Include="complex.cpp" />
     <ClCompile Include="float.cpp" />
     <ClCompile Include="long_int.cpp" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="boolean.h" />
     <ClInclude Include="calc_exp.h" />
+    <ClInclude Include="character.h" />
     <ClInclude Include="compare.h" />
     <ClInclude Include="complex.h" />
     <ClInclude Include="datatype.h" />
