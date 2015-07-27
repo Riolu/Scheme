@@ -721,20 +721,116 @@ class IsInexact :public Opt{
 	}
 };
 
-class IsCharEqual :public Opt{
+class CharIsEqual :public Opt{
 	Boolean *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
 		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
 		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->isCharEqual(second);
+		return first->charIsEqual(second);
 	}
 };
 
-class IsCharCiEqual :public Opt{
+class CharIsCiEqual :public Opt{
 	Boolean *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
 		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
 		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->isCharCiEqual(second);
+		return first->charIsCiEqual(second);
+	}
+};
+
+class CharLess :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
+		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+		return first->charLess(second);
+	}
+};
+
+class CharCiLess :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
+		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+		return first->charCiLess(second);
+	}
+};
+
+class CharLessequal :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
+		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+		return first->charLessequal(second);
+	}
+};
+
+class CharCiLessequal :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
+		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+		return first->charCiLessequal(second);
+	}
+};
+
+class CharIsAlpha :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charIsAlpha();
+	}
+};
+
+class CharIsNum :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charIsNum();
+	}
+};
+
+
+
+
+
+class CharIsUpCase :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charIsUpCase();
+	}
+};
+
+class CharIsLowCase :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charIsLowCase();
+	}
+};
+
+class CharToInt :public Opt{
+	Number *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charToInt();
+	}
+};
+
+class CharToUpCase :public Opt{
+	Character *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charToUpCase();
+	}
+};
+
+class CharToDownCase :public Opt{
+	Character *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charToDownCase();
 	}
 };

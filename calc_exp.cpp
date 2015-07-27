@@ -67,8 +67,21 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "char?") == 0) opt = new IsChar();
 		else if (strcmp(tk1, "exact?") == 0) opt = new IsExact();
 		else if (strcmp(tk1, "inexact?") == 0) opt = new IsInexact();
-		else if (strcmp(tk1, "char=?") == 0) opt = new IsCharEqual();
-		else if (strcmp(tk1, "char-ci=?") == 0) opt = new IsCharCiEqual();
+		else if (strcmp(tk1, "char=?") == 0) opt = new CharIsEqual();
+		else if (strcmp(tk1, "char-ci=?") == 0) opt = new CharIsCiEqual();
+		else if (strcmp(tk1, "char<?") == 0) opt = new CharLess();
+		else if (strcmp(tk1, "char-ci<?") == 0) opt = new CharCiLess();
+		else if (strcmp(tk1, "char<=?") == 0) opt = new CharLessequal();
+		else if (strcmp(tk1, "char-ci<=?") == 0) opt = new CharCiLessequal();
+		else if (strcmp(tk1, "char-alphabetic?") == 0) opt = new CharIsAlpha();
+		else if (strcmp(tk1, "char-numeric?") == 0) opt = new CharIsNum();
+
+		else if (strcmp(tk1, "char-upper-case?") == 0) opt = new CharIsUpCase();
+		else if (strcmp(tk1, "char-lower-case?") == 0) opt = new CharIsLowCase();
+		else if (strcmp(tk1, "char->integer") == 0) opt = new CharToInt();
+		else if (strcmp(tk1, "char-upcase") == 0) opt = new CharToUpCase();
+		else if (strcmp(tk1, "char-downcase") == 0) opt = new CharToDownCase();
+
 
 		else throw 0;
         while ((val = calc_exp()))
