@@ -10,6 +10,16 @@
 #include <iostream> 
 using namespace std; 
 
+int strToInt(string a){
+	int len = a.size();
+	int b = 0;
+	for (int i = 0; i<len; ++i){
+		b *= 10;
+		b += a[i] - '0';
+	}
+	return b;
+}
+
 Rational::Rational(string numerator, string denominator) :numerator_(numerator), denominator_(denominator){
 	type_ = RATIONAL;
 	reduce();
@@ -446,12 +456,21 @@ Boolean *Rational::isChar(){
 	return new Boolean(false);
 }
 
+Boolean *Rational::isString(){
+	return new Boolean(false);
+}
+
 Boolean *Rational::isExact(){
 	return new Boolean(true);
 }
 
 Boolean *Rational::isInexact(){
 	return new Boolean(false);
+}
+
+Character *Rational::intToChar(){
+	if (denominator_.number_ != "1") return NULL;
+	return new Character(strToInt(numerator_.number_));
 }
 
 void Rational::print(){

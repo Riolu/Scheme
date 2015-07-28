@@ -699,6 +699,10 @@ Boolean *Complex::isChar(){
 	return new Boolean(false);
 }
 
+Boolean *Complex::isString(){
+	return new Boolean(false);
+}
+
 Boolean *Complex::isExact(){
 	if (real_->type_ == RATIONAL) return new Boolean(true);
 	else return new Boolean(false);
@@ -707,6 +711,18 @@ Boolean *Complex::isExact(){
 Boolean *Complex::isInexact(){
 	if (real_->type_ == FLOAT) return new Boolean(true);
 	else return new Boolean(false);
+}
+
+Character *Complex::intToChar(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		if (tmp->numerator_.number_ == "0") return SCAST_CHARACTER(real_->intToChar());
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		if (tmp->number_ == 0) return SCAST_CHARACTER(real_->intToChar());
+	}
+	return NULL;
 }
 
 void Complex::print(){

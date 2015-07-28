@@ -5,6 +5,7 @@
 #include "complex.h"
 #include "boolean.h"
 #include "character.h"
+#include "string.h"
 #include <cmath>
 #include <iomanip>
 #include <sstream>
@@ -660,7 +661,7 @@ class IsEven :public Opt{
 class IsInteger :public Opt{
 	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
 		return (con->car)->isInteger();
 	}
 };
@@ -668,7 +669,7 @@ class IsInteger :public Opt{
 class IsRational :public Opt{
 	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
 		return (con->car)->isRational();
 	}
 };
@@ -676,7 +677,7 @@ class IsRational :public Opt{
 class IsReal :public Opt{
 	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
 		return (con->car)->isReal();
 	}
 };
@@ -684,7 +685,7 @@ class IsReal :public Opt{
 class IsComplex :public Opt{
 	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
 		return (con->car)->isComplex();
 	}
 };
@@ -692,7 +693,7 @@ class IsComplex :public Opt{
 class IsNumber :public Opt{
 	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
 		return (con->car)->isNumber();
 	}
 };
@@ -700,8 +701,16 @@ class IsNumber :public Opt{
 class IsChar :public Opt{
 	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
-		if (con->car->type_<1 || con->car->type_>5) throw 0;
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
 		return (con->car)->isChar();
+	}
+};
+
+class IsString :public Opt{
+	Datatype *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_<1 || con->car->type_>6) throw 0;
+		return (con->car)->isString();
 	}
 };
 
@@ -812,10 +821,18 @@ class CharIsLowCase :public Opt{
 };
 
 class CharToInt :public Opt{
-	Number *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->car->type_ != 5) throw 0;
 		return SCAST_CHARACTER(con->car)->charToInt();
+	}
+};
+
+class IntToChar :public Opt{
+	Datatype *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ <1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->intToChar();
 	}
 };
 

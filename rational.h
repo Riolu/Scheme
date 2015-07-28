@@ -1,6 +1,7 @@
 #pragma once
 #include "number.h"
 #include "long_int.h"
+#include "character.h"
 #include <cstring>
 #include <string> 
 
@@ -65,8 +66,10 @@ public:
 	virtual Boolean *isComplex();
 	virtual Boolean *isNumber();
 	virtual Boolean *isChar();
+	virtual Boolean *isString();
 	virtual Boolean *isExact();
 	virtual Boolean *isInexact();
+	virtual Character *intToChar();
 
 	virtual void print();
 	static Rational *from_string(const char *expression_in_char);

@@ -32,6 +32,10 @@ Boolean *Boolean::isChar(){
 	return new Boolean(false);
 }
 
+Boolean *Boolean::isString(){
+	return new Boolean(false);
+}
+
 void Boolean::print(){
 	if (value_) printf("#t");
 	else printf("#f");

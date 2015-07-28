@@ -8,6 +8,7 @@ public:
 		COMPLEX = 3,
 		BOOLEAN = 4,
 		CHARACTER = 5,
+		STRING = 6,
 	} type_;
 	Datatype(){}
 	virtual ~Datatype(){};
@@ -17,7 +18,7 @@ public:
 	virtual Datatype *isComplex() = 0;
 	virtual Datatype *isNumber() = 0;
 	virtual Datatype *isChar() = 0;
-
+	virtual Datatype *isString() = 0;
 	virtual void print() = 0;
 };
 

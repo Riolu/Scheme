@@ -1,11 +1,14 @@
 #pragma once
 #include "datatype.h"
-#define SCAST_BOOLEAN(x) static_cast<Boolean*>(x)
+#include "boolean.h"
+#include <string>
+using namespace std;
+#define SCAST_STRING(x) static_cast<String*>(x)
 
-class Boolean :public Datatype{
+class String :public Datatype{
 public:
-	Boolean(bool value = false);
-	~Boolean();
+	String(string str="");
+	~String();
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();
 	virtual Boolean *isReal();
@@ -14,7 +17,7 @@ public:
 	virtual Boolean *isChar();
 	virtual Boolean *isString();
 	virtual void print();
-	static Boolean *from_string(const char*expression);
+	static String *from_string(const char*expression);
 	
-	bool value_;
+	string string_;
 };

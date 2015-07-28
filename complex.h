@@ -1,6 +1,7 @@
 #pragma once
 #include "number.h"
 #include "long_int.h"
+#include "character.h"
 #include <cstring>
 #include <string>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
@@ -68,8 +69,10 @@ public:
 	virtual Boolean *isComplex();
 	virtual Boolean *isNumber();
 	virtual Boolean *isChar();
+	virtual Boolean *isString();
 	virtual Boolean *isExact();
 	virtual Boolean *isInexact();
+	virtual Character *intToChar();
 
 	virtual void print();
 	static Complex *from_string(const char *expression);

@@ -405,12 +405,21 @@ Boolean *Float::isChar(){
 	return new Boolean(false);
 }
 
+Boolean *Float::isString(){
+	return new Boolean(false);
+}
+
 Boolean *Float::isExact(){
 	return new Boolean(false);
 }
 
 Boolean *Float::isInexact(){
 	return new Boolean(true);
+}
+
+Character *Float::intToChar(){
+	if (number_ != trunc(number_)) return NULL;
+	return new Character(int(number_));
 }
 
 void Float::print(){

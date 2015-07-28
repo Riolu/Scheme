@@ -60,8 +60,9 @@ public:
 	virtual Boolean *isComplex() = 0;
 	virtual Boolean *isNumber() = 0;
 	virtual Boolean *isChar() = 0;
+	virtual Boolean *isString() = 0;
 	virtual Boolean *isExact() = 0;
 	virtual Boolean *isInexact() = 0;
-
+	virtual Datatype *intToChar() = 0;
 	virtual void print() = 0;
 };

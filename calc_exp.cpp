@@ -65,6 +65,7 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "complex?") == 0) opt = new IsComplex();
 		else if (strcmp(tk1, "number?") == 0) opt = new IsNumber();
 		else if (strcmp(tk1, "char?") == 0) opt = new IsChar();
+		else if (strcmp(tk1, "string?") == 0) opt = new IsString();
 		else if (strcmp(tk1, "exact?") == 0) opt = new IsExact();
 		else if (strcmp(tk1, "inexact?") == 0) opt = new IsInexact();
 		else if (strcmp(tk1, "char=?") == 0) opt = new CharIsEqual();
@@ -79,6 +80,8 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "char-upper-case?") == 0) opt = new CharIsUpCase();
 		else if (strcmp(tk1, "char-lower-case?") == 0) opt = new CharIsLowCase();
 		else if (strcmp(tk1, "char->integer") == 0) opt = new CharToInt();
+		else if (strcmp(tk1, "integer->char") == 0) opt = new IntToChar();
+
 		else if (strcmp(tk1, "char-upcase") == 0) opt = new CharToUpCase();
 		else if (strcmp(tk1, "char-downcase") == 0) opt = new CharToDownCase();
 
@@ -107,7 +110,7 @@ Datatype *calc_exp(){
 		if(!res) { res = Complex::from_string(tk0);}
 		if (!res) { res = Boolean::from_string(tk0); }
 		if (!res) { res = Character::from_string(tk0); }
-
+		if (!res) { res = String::from_string(tk0); }
 		if(res==NULL){throw 0;}
     }
     return res;
