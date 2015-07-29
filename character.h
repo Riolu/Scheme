@@ -21,7 +21,6 @@ public:
 	virtual Character *charToUpCase();
 	virtual Character *charToDownCase();
 
-
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();
 	virtual Boolean *isReal();

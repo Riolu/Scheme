@@ -8,20 +8,18 @@ using namespace std;
 
 char upper(char ch){
 	if (ch >= 'a' && ch <= 'z') return (char)(ch - 32);
-	else if (ch >= 'A' && ch <= 'Z') return ch;
 	else return ch;
 }
 
 char lower(char ch){
-	if (ch >= 'a' && ch <= 'z') return ch;
-	else if (ch >= 'A' && ch <= 'Z') return (char)(ch + 32);
+	if (ch >= 'A' && ch <= 'Z') return (char)(ch + 32);
 	else return ch;
 }
 
-void turn(string &str, int n){
+void intToStr(string &str, int n){
 	if (n / 10 == 0) str += n + '0';
 	else{
-		turn(str, n / 10);
+		intToStr(str, n / 10);
 		str += n % 10 + '0';
 	}
 }
@@ -37,11 +35,7 @@ Boolean *Character::charIsEqual(Character *char2){
 }
 
 Boolean *Character::charIsCiEqual(Character *char2){
-	if (((char_ >= 'a'&&char_ <= 'z') || (char_ >= 'A'&&char_ <= 'Z')) && ((char2->char_ >= 'a'&&char2->char_ <= 'z') || (char2->char_ >= 'A'&&char2->char_ <= 'Z'))){
-		if (char_ == char2->char_ || abs(char_ - char2->char_) == 32) return new Boolean(true);
-		else return new Boolean(false);
-	}
-	else return new Boolean(char_ == char2->char_);
+	return new Boolean(upper(char_) == upper(char2->char_));
 }
 
 Boolean *Character::charLess(Character *char2){
@@ -49,11 +43,7 @@ Boolean *Character::charLess(Character *char2){
 }
 
 Boolean *Character::charCiLess(Character *char2){
-	if (((char_ >= 'a'&&char_ <= 'z') || (char_ >= 'A'&&char_ <= 'Z')) && ((char2->char_ >= 'a'&&char2->char_ <= 'z') || (char2->char_ >= 'A'&&char2->char_ <= 'Z'))){
-		if (upper(char_) < upper(char2->char_)) return new Boolean(true);
-		else return new Boolean(false);
-	}
-	else return new Boolean(char_ < char2->char_);
+	return new Boolean(upper(char_) < upper(char2->char_));
 }
 
 Boolean *Character::charLessequal(Character *char2){
@@ -61,11 +51,7 @@ Boolean *Character::charLessequal(Character *char2){
 }
 
 Boolean *Character::charCiLessequal(Character *char2){
-	if (((char_ >= 'a'&&char_ <= 'z') || (char_ >= 'A'&&char_ <= 'Z')) && ((char2->char_ >= 'a'&&char2->char_ <= 'z') || (char2->char_ >= 'A'&&char2->char_ <= 'Z'))){
-		if (upper(char_) <= upper(char2->char_)) return new Boolean(true);
-		else return new Boolean(false);
-	}
-	else return new Boolean(char_ <= char2->char_);
+	return new Boolean(upper(char_) <= upper(char2->char_));
 }
 
 Boolean *Character::charIsAlpha(){
@@ -86,7 +72,7 @@ Boolean *Character::charIsLowCase(){
 
 Datatype *Character::charToInt(){
 	string tmp = "";
-	turn(tmp, int(char_));
+	intToStr(tmp, int(char_));
 	return new Rational(tmp, "1");
 }
 

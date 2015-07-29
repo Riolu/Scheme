@@ -851,3 +851,57 @@ class CharToDownCase :public Opt{
 		return SCAST_CHARACTER(con->car)->charToDownCase();
 	}
 };
+
+class StrIsEqual :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
+		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+		return first->strIsEqual(second);
+	}
+};
+
+class StrIsCiEqual :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
+		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+		return first->strIsCiEqual(second);
+	}
+};
+
+class StrLess :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
+		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+		return first->strLess(second);
+	}
+};
+
+class StrCiLess :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
+		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+		return first->strCiLess(second);
+	}
+};
+
+class StrLessequal :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
+		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+		return first->strLessequal(second);
+	}
+};
+
+class StrCiLessequal :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
+		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+		return first->strCiLessequal(second);
+	}
+};

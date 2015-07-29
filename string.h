@@ -9,6 +9,13 @@ class String :public Datatype{
 public:
 	String(string str="");
 	~String();
+	virtual Boolean *strIsEqual(String *string2);
+	virtual Boolean *strIsCiEqual(String *string2);
+	virtual Boolean *strLess(String *string2);
+	virtual Boolean *strCiLess(String *string2);
+	virtual Boolean *strLessequal(String *string2);
+	virtual Boolean *strCiLessequal(String *string2);
+
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();
 	virtual Boolean *isReal();

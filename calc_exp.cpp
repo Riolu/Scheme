@@ -81,10 +81,14 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "char-lower-case?") == 0) opt = new CharIsLowCase();
 		else if (strcmp(tk1, "char->integer") == 0) opt = new CharToInt();
 		else if (strcmp(tk1, "integer->char") == 0) opt = new IntToChar();
-
 		else if (strcmp(tk1, "char-upcase") == 0) opt = new CharToUpCase();
 		else if (strcmp(tk1, "char-downcase") == 0) opt = new CharToDownCase();
-
+		else if (strcmp(tk1, "string=?") == 0) opt = new StrIsEqual();
+		else if (strcmp(tk1, "string-ci=?") == 0) opt = new StrIsCiEqual();
+		else if (strcmp(tk1, "string<?") == 0) opt = new StrLess();
+		else if (strcmp(tk1, "string-ci<?") == 0) opt = new StrCiLess();
+		else if (strcmp(tk1, "string<=?") == 0) opt = new StrLessequal();
+		else if (strcmp(tk1, "string-ci<=?") == 0) opt = new StrCiLessequal();
 
 		else throw 0;
         while ((val = calc_exp()))

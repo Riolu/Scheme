@@ -377,7 +377,11 @@ Number *Rational::mag(){
 }
 
 Number *Rational::ang(){
-	return new Rational("0", "1");
+	Float *f = new Float();
+	Float *tmp = SCAST_FLOAT(f->convert(this));
+	Number *result = tmp->ang();
+	delete f;
+	return result;
 }
 
 Boolean *Rational::less(Number *number2){

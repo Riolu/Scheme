@@ -8,6 +8,56 @@ String::String(string str) :string_(str){
 
 String::~String(){}
 
+Boolean *String::strIsEqual(String *string2){
+	return new Boolean(string_ == string2->string_);
+}
+
+Boolean *String::strIsCiEqual(String *string2){
+	string str1 = "", str2 = "";
+	for (int i = 0; i < string_.size(); ++i){
+		if (string_[i] >= 'a' && string_[i] <= 'z') str1 += string_[i] - 32;
+		else str1 += string_[i];
+	}
+	for (int i = 0; i < string2->string_.size(); ++i){
+		if (string2->string_[i] >= 'a' && string2->string_[i] <= 'z') str2 += string2->string_[i] - 32;
+		else str2 += string2->string_[i];
+	}
+	return new Boolean(str1 == str2);
+}
+
+Boolean *String::strLess(String *string2){
+	return new Boolean(string_ < string2->string_);
+}
+
+Boolean *String::strCiLess(String *string2){
+	string str1 = "", str2 = "";
+	for (int i = 0; i < string_.size(); ++i){
+		if (string_[i] >= 'a' && string_[i] <= 'z') str1 += string_[i] - 32;
+		else str1 += string_[i];
+	}
+	for (int i = 0; i < string2->string_.size(); ++i){
+		if (string2->string_[i] >= 'a' && string2->string_[i] <= 'z') str2 += string2->string_[i] - 32;
+		else str2 += string2->string_[i];
+	}
+	return new Boolean(str1 < str2);
+}
+
+Boolean *String::strLessequal(String *string2){
+	return new Boolean(string_ <= string2->string_);
+}
+
+Boolean *String::strCiLessequal(String *string2){
+	string str1 = "", str2 = "";
+	for (int i = 0; i < string_.size(); ++i){
+		if (string_[i] >= 'a' && string_[i] <= 'z') str1 += string_[i] - 32;
+		else str1 += string_[i];
+	}
+	for (int i = 0; i < string2->string_.size(); ++i){
+		if (string2->string_[i] >= 'a' && string2->string_[i] <= 'z') str2 += string2->string_[i] - 32;
+		else str2 += string2->string_[i];
+	}
+	return new Boolean(str1 <= str2);
+}
 
 
 Boolean *String::isInteger(){

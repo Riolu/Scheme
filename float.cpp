@@ -326,7 +326,11 @@ Number *Float::mag(){
 }
 
 Number *Float::ang(){
-	return new Float(0);
+	Complex *c = new Complex();
+	Float *tmp = SCAST_FLOAT(c->convert(this));
+	Number *result = tmp->ang();
+	delete c;
+	return result;
 }
 
 Boolean *Float::less(Number *number2){
