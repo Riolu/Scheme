@@ -366,6 +366,12 @@ Boolean *Float::greaterequal(Number *number2){
 	else return new Boolean(false);
 }
 
+Boolean *Float::isEqual(Number *number2){
+	Float *tmp = SCAST_FLOAT(number2);
+	if (number_ == tmp->number_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
 Boolean *Float::isZero(){
 	if (number_ == 0) return new Boolean(true);
 	else return new Boolean(false);

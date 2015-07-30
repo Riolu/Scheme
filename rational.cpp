@@ -396,6 +396,7 @@ Boolean *Rational::lessequal(Number *number2){
 	else return new Boolean(false);
 }
 
+
 Boolean *Rational::greater(Number *number2){
 	Rational *tmp = SCAST_RATIONAL(number2);
 	if (denominator_*tmp->numerator_ < numerator_*tmp->denominator_) return new Boolean(true);
@@ -405,6 +406,12 @@ Boolean *Rational::greater(Number *number2){
 Boolean *Rational::greaterequal(Number *number2){
 	Rational *tmp = SCAST_RATIONAL(number2);
 	if (denominator_*tmp->numerator_ < numerator_*tmp->denominator_ || denominator_*tmp->numerator_ == numerator_*tmp->denominator_) return new Boolean(true);
+	else return new Boolean(false);
+}
+
+Boolean *Rational::isEqual(Number *number2){
+	Rational *tmp = SCAST_RATIONAL(number2);
+	if (denominator_*tmp->numerator_ == numerator_*tmp->denominator_) return new Boolean(true);
 	else return new Boolean(false);
 }
 

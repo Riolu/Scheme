@@ -52,6 +52,7 @@ public:
 	virtual Boolean *lessequal(Number *number2);
 	virtual Boolean *greater(Number *number2);
 	virtual Boolean *greaterequal(Number *number2);
+	virtual Boolean *isEqual(Number *number2);
 	virtual Boolean *isZero();
 	virtual Boolean *isNegative();
 	virtual Boolean *isPositive();

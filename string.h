@@ -19,10 +19,13 @@ public:
 	virtual Boolean *strCiLessequal(String *string2);
 
 	virtual Datatype *strLen();
-	virtual Character *strRef(Number *number);
+	virtual Datatype *strRef(Number *number);
+	virtual String *subStr(Number *start, Number *end);
+	virtual String *strAppend(String *string2);
+	virtual String *strCopy();
+	virtual String *generateStr(Character *ch);
 
 	virtual Datatype *strToNum();
-	//virtual Datatype *strToNum(Number *number);
 
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();
@@ -33,6 +36,7 @@ public:
 	virtual Boolean *isString();
 	virtual void print();
 	static String *from_string(const char*expression);
-	
+	static String *makeStr(Number *number, Character *ch);
+
 	string string_;
 };

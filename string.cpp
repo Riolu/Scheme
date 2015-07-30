@@ -78,11 +78,32 @@ Datatype *String::strLen(){
 	return new Rational(tmp, "1");
 }
 
-Character *String::strRef(Number *number){
+Datatype *String::strRef(Number *number){
 	int len = string_.size();
 	int pos = number->returnInt();
-	assert(pos >= 0 && "Index Out Of Range!"); assert(pos <=len-1 && "Index Out Of Range!");
+	assert(pos >= 0 && pos <= len - 1 && "Index Out Of Range!");
 	return new Character(string_[pos]);
+}
+
+String *String::subStr(Number *start, Number *end){
+	int len = string_.size();
+	int pos1 = start->returnInt(), pos2 = end->returnInt();
+	assert(pos1 >= 0 && pos2<=len && pos1<=pos2 && "Index Out Of Range!");
+	return new String(string_.substr(pos1, pos2-pos1+1));
+}
+
+String *String::strAppend(String *string2){
+	return new String(string_.append(string2->string_));
+}
+
+String *String::strCopy(){
+	return new String(*this);
+}
+
+String *String::generateStr(Character *ch){
+	string res = string_;
+	res += ch->char_;
+	return new String(res);
 }
 
 Datatype *String::strToNum(){
@@ -105,12 +126,6 @@ Datatype *String::strToNum(){
 		return res;
 	}
 }
-
-//Datatype *String::strToNum(Number *number){
-//	int base = number->returnInt();
-//	assert(base == 2 || base == 8 || base == 10 || base == 16 && "Base can only be either of 2, 8, 10, 16!");
-//
-//}
 
 
 Boolean *String::isInteger(){
@@ -150,4 +165,13 @@ String *String::from_string(const char *expression){
 	if (expression[0] != '\"' || expression[len - 1] != '\"') return NULL;
 	string str = expression;
 	return new String(str.substr(1,len-2));
+}
+
+String *String::makeStr(Number *number, Character *ch){
+	int n = number->returnInt();
+	string res = "";
+	for (int i = 0; i < n; ++i){
+		res += ch->char_;
+	}
+	return new String(res);
 }

@@ -607,6 +607,29 @@ Boolean *Complex::greaterequal(Number *number2){
 	return NULL;
 }
 
+Boolean *Complex::isEqual(Number *number2){
+	Complex *tmp = SCAST_COMPLEX(number2);
+	bool flag1, flag2;
+	if (real_->type_ == tmp->real_->type_){
+		flag1 = real_->isEqual(tmp->real_)->value_;
+		flag2 = imag_->isEqual(tmp->imag_)->value_;
+	}
+	else if (real_->type_ > tmp->real_->type_){
+		Number *conv1, *conv2;
+		flag1 = real_->isEqual(conv1 = real_->convert(tmp->real_))->value_;
+		flag2 = imag_->isEqual(conv2 = imag_->convert(tmp->imag_))->value_;
+		delete conv1, conv2;
+	}
+	else{
+		Number *conv1, *conv2;
+		flag1 = (conv1 = tmp->real_->convert(real_))->isEqual(tmp->real_)->value_;
+		flag2 = (conv1 = tmp->imag_->convert(imag_))->isEqual(tmp->imag_)->value_;
+		delete conv1, conv2;
+	}
+	if (flag1 && flag2) return new Boolean(true);
+	else return new Boolean(false);
+}
+
 Boolean *Complex::isZero(){
 	if (imag_->type_ == RATIONAL){
 		Rational *tmp = SCAST_RATIONAL(imag_);

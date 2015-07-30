@@ -68,6 +68,7 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "string?") == 0) opt = new IsString();
 		else if (strcmp(tk1, "exact?") == 0) opt = new IsExact();
 		else if (strcmp(tk1, "inexact?") == 0) opt = new IsInexact();
+		else if (strcmp(tk1, "equal?") == 0) opt = new IsEqual();
 		else if (strcmp(tk1, "char=?") == 0) opt = new CharIsEqual();
 		else if (strcmp(tk1, "char-ci=?") == 0) opt = new CharIsCiEqual();
 		else if (strcmp(tk1, "char<?") == 0) opt = new CharLess();
@@ -91,7 +92,11 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "string-ci<=?") == 0) opt = new StrCiLessequal();
 		else if (strcmp(tk1, "string-length") == 0) opt = new StrLen();
 		else if (strcmp(tk1, "string-ref") == 0) opt = new StrRef();
-
+		else if (strcmp(tk1, "substring") == 0) opt = new SubStr();
+		else if (strcmp(tk1, "string-append") == 0) opt = new StrAppend();
+		else if (strcmp(tk1, "string-copy") == 0) opt = new StrCopy();
+		else if (strcmp(tk1, "make-string") == 0) opt = new MakeStr();
+		else if (strcmp(tk1, "string") == 0) opt = new GenerateStr();
 		else if (strcmp(tk1, "string->number") == 0) opt = new StrToNum();
 		else if (strcmp(tk1, "number->string") == 0) opt = new NumToStr();
 

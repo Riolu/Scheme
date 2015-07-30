@@ -6,6 +6,7 @@ class Boolean :public Datatype{
 public:
 	Boolean(bool value = false);
 	~Boolean();
+	virtual Boolean *isEqual(Boolean *boolean2);
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();
 	virtual Boolean *isReal();

@@ -8,6 +8,10 @@ Boolean::Boolean(bool value) :value_(value){
 
 Boolean::~Boolean(){}
 
+Boolean *Boolean::isEqual(Boolean *boolean2){
+	return new Boolean(value_ == boolean2->value_);
+}
+
 Boolean *Boolean::isInteger(){
 	return new Boolean(false);
 }

@@ -1,11 +1,12 @@
 #pragma once
 #include "datatype.h"
+#include "number.h"
 #include "boolean.h"
 #define SCAST_CHARACTER(x) static_cast<Character*>(x)
 
 class Character :public Datatype{
 public:
-	Character(char ch='\0');
+	Character(char ch = '\0');
 	~Character();
 	virtual Boolean *charIsEqual(Character *char2);
 	virtual Boolean *charIsCiEqual(Character *char2);

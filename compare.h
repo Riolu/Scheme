@@ -915,7 +915,7 @@ class StrLen :public Opt{
 };
 
 class StrRef :public Opt{
-	Character *calc(Cons *con){
+	Datatype *calc(Cons *con){
 		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
 		if (con->car->type_ != 6 || con->cdr->car->type_ <1 || con->cdr->car->type_ >3) throw 0;
 		String *first = SCAST_STRING(con->car); 
@@ -939,5 +939,97 @@ class NumToStr :public Opt{
 		assert(con->cdr == NULL && "expected number of arguments is 1");
 		if (con->car->type_ <1 || con->car->type_>3) throw 0;
 		return SCAST_NUMBER(con->car)->numToStr();
+	}
+};
+
+class SubStr :public Opt{
+	String *calc(Cons *con){
+		assert(con->cdr->cdr->cdr == NULL && "expected number of arguments is 3");
+		if (con->car->type_ != 6 || con->cdr->car->type_ <1 || con->cdr->car->type_>3 || con->cdr->cdr->car->type_ <1 || con->cdr->cdr->car->type_>3) throw 0;
+		Number *start = SCAST_NUMBER(con->cdr->car), *end = SCAST_NUMBER(con->cdr->cdr->car);
+		return SCAST_STRING(con->car)->subStr(start, end);
+	}
+};
+
+class StrAppend :public Opt {
+	String *calc(Cons *con){
+		String *res = new String(""), *last;
+		for (; con; con = con->cdr){
+			if (con->car->type_ != 6) throw 0;
+			String *opr = SCAST_STRING(con->car);
+			last = res;
+			res = res->strAppend(opr);
+			delete last;
+		}
+		return res;
+	}
+};
+
+class StrCopy :public Opt{
+	String *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 6) throw 0;
+		return SCAST_STRING(con->car)->strCopy();
+	}
+};
+
+class MakeStr :public Opt{
+	Datatype *calc(Cons *con){
+		if (con->car->type_ <1 || con->car->type_>3) throw 0;
+		if (con->cdr == NULL){
+			Number *first = SCAST_NUMBER(con->car);
+			Character *second = new Character('\0');
+			return String::makeStr(first, second);
+		}
+		else if (con->cdr->cdr == NULL){
+			if (con->cdr->car->type_ != 5) throw 0;
+			Number *first = SCAST_NUMBER(con->car);
+			Character *second = SCAST_CHARACTER(con->cdr->car);
+			return String::makeStr(first, second);
+		}
+		else throw 0;
+	}
+};
+
+class GenerateStr :public Opt {
+	String *calc(Cons *con){
+		String *res = new String(""), *last;
+		for (; con; con = con->cdr){
+			if (con->car->type_ != 5) throw 0;
+			Character *opr = SCAST_CHARACTER(con->car);
+			last = res;
+			res = res->generateStr(opr);
+			delete last;
+		}
+		return res;
+	}
+};
+
+class IsEqual :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_<1 || con->car->type_>6 || con->cdr->car->type_<1 || con->cdr->car->type_>6) throw 0;
+		if (con->car->type_ >= 1 && con->car->type_ <= 3 && con->cdr->car->type_ >= 1 && con->cdr->car->type_ <= 3){
+			Boolean *res;
+			Number *first, *second, *conv;
+			first = SCAST_NUMBER(con->car), second = SCAST_NUMBER(con->cdr->car);
+			if (first->type_>second->type_) res = first->isEqual(conv = first->convert(second));
+			else res = (conv = second->convert(first))->isEqual(second);
+			delete conv;
+			return res;
+		}
+		else if (con->car->type_ != con->cdr->car->type_) return new Boolean(false);
+		else if (con->car->type_ == 4){
+			Boolean *first = SCAST_BOOLEAN(con->car), *second = SCAST_BOOLEAN(con->cdr->car);
+			return first->isEqual(second);
+		}
+		else if (con->car->type_ == 5){
+			Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
+			return first->charIsEqual(second);
+		}
+		else{
+			String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
+			return first->strIsEqual(second);
+		}
 	}
 };
