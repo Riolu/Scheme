@@ -22,7 +22,7 @@ void turn(string &str, double n){
 	}
 }
 
-string doubleToString(double d){
+string doubleToString(double d){ //only for double which is integer
 	string str="";
 	if (d < 0){
 		d = fabs(d);
@@ -36,6 +36,15 @@ string doubleToString(double d){
 	//if (os << d)
 	//	return os.str();
 	//return "invalid conversion";
+}
+
+string doubleToStr(double d){
+	ostringstream os;
+	os.precision(18);
+	os << d;
+	string ans = os.str();
+	if (trunc(d) == d && fabs(d) < 1e18) ans += ".0";
+	return ans;
 }
 
 double stringToDouble(const string &str){
@@ -424,6 +433,15 @@ Boolean *Float::isInexact(){
 Character *Float::intToChar(){
 	if (number_ != trunc(number_)) return NULL;
 	return new Character(int(number_));
+}
+
+String *Float::numToStr(){
+	return new String(doubleToStr(number_));
+}
+
+int Float::returnInt(){
+	assert(trunc(number_)==number_ && "Integer Expected!");
+	return int(number_);
 }
 
 void Float::print(){

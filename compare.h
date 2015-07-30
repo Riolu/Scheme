@@ -905,3 +905,39 @@ class StrCiLessequal :public Opt{
 		return first->strCiLessequal(second);
 	}
 };
+
+class StrLen :public Opt{
+	Datatype *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 6) throw 0;
+		return SCAST_STRING(con->car)->strLen();
+	}
+};
+
+class StrRef :public Opt{
+	Character *calc(Cons *con){
+		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
+		if (con->car->type_ != 6 || con->cdr->car->type_ <1 || con->cdr->car->type_ >3) throw 0;
+		String *first = SCAST_STRING(con->car); 
+		Number *second = SCAST_NUMBER(con->cdr->car);
+		return first->strRef(second);
+	}
+};
+
+
+
+class StrToNum :public Opt{
+	Datatype *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 6) throw 0;
+		return SCAST_STRING(con->car)->strToNum();
+	}
+};
+
+class NumToStr :public Opt{
+	Datatype *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ <1 || con->car->type_>3) throw 0;
+		return SCAST_NUMBER(con->car)->numToStr();
+	}
+};

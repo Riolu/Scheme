@@ -89,6 +89,11 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "string-ci<?") == 0) opt = new StrCiLess();
 		else if (strcmp(tk1, "string<=?") == 0) opt = new StrLessequal();
 		else if (strcmp(tk1, "string-ci<=?") == 0) opt = new StrCiLessequal();
+		else if (strcmp(tk1, "string-length") == 0) opt = new StrLen();
+		else if (strcmp(tk1, "string-ref") == 0) opt = new StrRef();
+
+		else if (strcmp(tk1, "string->number") == 0) opt = new StrToNum();
+		else if (strcmp(tk1, "number->string") == 0) opt = new NumToStr();
 
 		else throw 0;
         while ((val = calc_exp()))

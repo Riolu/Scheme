@@ -70,11 +70,6 @@ Boolean *Character::charIsLowCase(){
 	return new Boolean(char_ >= 'a' && char_ <= 'z');
 }
 
-Datatype *Character::charToInt(){
-	string tmp = "";
-	intToStr(tmp, int(char_));
-	return new Rational(tmp, "1");
-}
 
 Character *Character::charToUpCase(){
 	if (char_ >= 'a' && char_ <= 'z') return new Character(char_ - 32);
@@ -86,6 +81,11 @@ Character *Character::charToDownCase(){
 	else return new Character(char_);
 }
 
+Datatype *Character::charToInt(){
+	string tmp = "";
+	intToStr(tmp, int(char_));
+	return new Rational(tmp, "1");
+}
 
 
 Boolean *Character::isInteger(){

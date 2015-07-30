@@ -64,5 +64,7 @@ public:
 	virtual Boolean *isExact() = 0;
 	virtual Boolean *isInexact() = 0;
 	virtual Datatype *intToChar() = 0;
+	virtual Datatype *numToStr() = 0;
+	virtual int returnInt() = 0;
 	virtual void print() = 0;
 };

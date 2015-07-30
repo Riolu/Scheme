@@ -477,6 +477,25 @@ Character *Rational::intToChar(){
 	return new Character(strToInt(numerator_.number_));
 }
 
+String *Rational::numToStr(){
+	string res = "";
+	for (int i = 0; i < numerator_.number_.size(); ++i){
+		res += numerator_.number_[i];
+	}
+	if (denominator_ != LongInt("1")){
+		res += '/';
+		for (int i = 0; i < denominator_.number_.size(); ++i){
+			res += denominator_.number_[i];
+		}
+	}
+	return new String(res);
+}
+
+int Rational::returnInt(){
+	assert(denominator_.number_ == "1" && "Integer Expected!");
+	return int(double(numerator_));
+}
+
 void Rational::print(){
 	numerator_.print();
 	if (denominator_ != LongInt("1")){

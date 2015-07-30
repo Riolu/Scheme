@@ -2,6 +2,7 @@
 #include "number.h"
 #include "long_int.h"
 #include "character.h"
+#include "string.h"
 #include <cstring>
 #include <string> 
 
@@ -70,7 +71,8 @@ public:
 	virtual Boolean *isExact();
 	virtual Boolean *isInexact();
 	virtual Character *intToChar();
-
+	virtual String *numToStr();
+	virtual int returnInt();
 	virtual void print();
 	static Rational *from_string(const char *expression_in_char);
 

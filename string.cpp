@@ -1,6 +1,18 @@
 #include "string.h"
+#include "rational.h"
+#include "float.h"
+#include "complex.h"
 #include <cstring>
+#include <cassert>
 #include <iostream>
+
+void intToStr2(string &str, int n){
+	if (n / 10 == 0) str += n + '0';
+	else{
+		intToStr2(str, n / 10);
+		str += n % 10 + '0';
+	}
+}
 
 String::String(string str) :string_(str){
 	type_ = STRING;
@@ -58,6 +70,47 @@ Boolean *String::strCiLessequal(String *string2){
 	}
 	return new Boolean(str1 <= str2);
 }
+
+Datatype *String::strLen(){
+	int len = string_.size();
+	string tmp = "";
+	intToStr2(tmp, len);
+	return new Rational(tmp, "1");
+}
+
+Character *String::strRef(Number *number){
+	int len = string_.size();
+	int pos = number->returnInt();
+	assert(pos >= 0 && "Index Out Of Range!"); assert(pos <=len-1 && "Index Out Of Range!");
+	return new Character(string_[pos]);
+}
+
+Datatype *String::strToNum(){
+	int len = string_.size();
+	char *str = new char[len + 1];
+	for (int i = 0; i < len; ++i){
+		str[i] = string_[i];
+	}
+	str[len] = '\0';
+	const char *tmp = str;
+	Number *res = Rational::from_string(tmp);
+	if (!res) res = Float::from_string(tmp);
+	if (!res) res = Complex::from_string(tmp);
+	if (!res){
+		delete tmp;
+		return new Boolean(false);
+	}
+	else{
+		delete tmp;
+		return res;
+	}
+}
+
+//Datatype *String::strToNum(Number *number){
+//	int base = number->returnInt();
+//	assert(base == 2 || base == 8 || base == 10 || base == 16 && "Base can only be either of 2, 8, 10, 16!");
+//
+//}
 
 
 Boolean *String::isInteger(){

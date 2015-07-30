@@ -1,6 +1,8 @@
 #pragma once
 #include "datatype.h"
+#include "number.h"
 #include "boolean.h"
+#include "character.h"
 #include <string>
 using namespace std;
 #define SCAST_STRING(x) static_cast<String*>(x)
@@ -15,6 +17,12 @@ public:
 	virtual Boolean *strCiLess(String *string2);
 	virtual Boolean *strLessequal(String *string2);
 	virtual Boolean *strCiLessequal(String *string2);
+
+	virtual Datatype *strLen();
+	virtual Character *strRef(Number *number);
+
+	virtual Datatype *strToNum();
+	//virtual Datatype *strToNum(Number *number);
 
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();

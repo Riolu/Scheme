@@ -725,6 +725,29 @@ Character *Complex::intToChar(){
 	return NULL;
 }
 
+String *Complex::numToStr(){
+	string res = "";
+	string real = SCAST_STRING(real_->numToStr())->string_, imag = SCAST_STRING(imag_->numToStr())->string_;
+	res += real;
+	if (imag[0] != '-') res += '+';
+	res += imag;
+	res += 'i';
+	return new String(res);
+}
+
+int Complex::returnInt(){
+	if (imag_->type_ == RATIONAL){
+		Rational *tmp = SCAST_RATIONAL(imag_);
+		assert(tmp->numerator_.number_ == "0" && "Integer Expected!");
+		return real_->returnInt();
+	}
+	else{
+		Float *tmp = SCAST_FLOAT(imag_);
+		assert(tmp->number_ == 0 && "Integer Expected!");
+		return real_->returnInt();
+	}
+}
+
 void Complex::print(){
 	real_->print();
 	if (imag_->type_ == RATIONAL){

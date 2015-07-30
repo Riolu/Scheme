@@ -2,6 +2,7 @@
 #include "number.h"
 #include "long_int.h"
 #include "character.h"
+#include "string.h"
 #include <cstring>
 #include <string>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
@@ -73,7 +74,8 @@ public:
 	virtual Boolean *isExact();
 	virtual Boolean *isInexact();
 	virtual Character *intToChar();
-
+	virtual String *numToStr();
+	virtual int returnInt();
 	virtual void print();
 	static Complex *from_string(const char *expression);
 	Number* real_;

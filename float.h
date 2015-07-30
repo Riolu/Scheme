@@ -1,6 +1,7 @@
 #pragma once
 #include "number.h"
 #include "character.h"
+#include "string.h"
 
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 
@@ -66,7 +67,8 @@ public:
 	virtual Boolean *isExact();
 	virtual Boolean *isInexact();
 	virtual Character *intToChar();
-
+	virtual String *numToStr();
+	virtual int returnInt();
 	virtual void print();
 	static Float *from_string(const char *expression);
 

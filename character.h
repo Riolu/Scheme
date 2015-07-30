@@ -17,9 +17,10 @@ public:
 	virtual Boolean *charIsNum();
 	virtual Boolean *charIsUpCase();
 	virtual Boolean *charIsLowCase();
-	virtual Datatype *charToInt();
 	virtual Character *charToUpCase();
 	virtual Character *charToDownCase();
+
+	virtual Datatype *charToInt();
 
 	virtual Boolean *isInteger();
 	virtual Boolean *isRational();
