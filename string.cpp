@@ -159,9 +159,12 @@ Boolean *String::isString(){
 void String::print(){
 	cout << "\"";
 	for (int i = 0; i < string_.size(); ++i){
-		if (string_[i] == '\t') cout << "\\t";
+		if (string_[i] == '\b') cout << "\\b";
+		else if (string_[i] == '\f') cout << "\\f";
 		else if (string_[i] == '\n') cout << "\\n";
 		else if (string_[i] == '\r') cout << "\\r";
+		else if (string_[i] == '\t') cout << "\\t";
+		else if (string_[i] == '\v') cout << "\\v";
 		else if (string_[i] == '\\') cout << "\\\\";
 		else if (string_[i] == '\'') cout << "\\\'";
 		else if (string_[i] == '\"') cout << "\\\"";

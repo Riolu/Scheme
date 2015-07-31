@@ -32,7 +32,7 @@ char *next_token() {
         {
             case '(':
             case ')':
-				if (s=="#\\"){}
+				if (s=="#\\"){} //special cases: #\( #\)
 				else{
 					if (len>0)
 						ans = s; cur = len;
@@ -44,13 +44,14 @@ char *next_token() {
             default:
                 if (isspace(ch))
                 {
-					if (s[0] == '\"' && s[s.size() - 1] != '\"'){ //string can receive space
-						s = s + (char)ch;
-						len++;
+					if (s == "\""){ //string can receive space
+						s = s + (char)ch; len++; 
+					} 
+					else if (s[0] == '\"' && s[s.size() - 1] != '\"'){ 
+						s = s + (char)ch; len++;
 					}
-					else if (s == "#\\"){
-						s = s + (char)ch;
-						len++;
+					else if (s == "#\\"){ // #\ 
+						s = s + (char)ch; len++;
 					}
 					else{
 						if (len > 0)
@@ -68,11 +69,14 @@ char *next_token() {
 						}
 						else{
 							if (cnt == 1){
-								if (ch == 't'){ s = s + '\t'; len++; }
+								if (ch == 'b'){ s = s + '\b'; len++; }
+								if (ch == 'f'){ s = s + '\f'; len++; }
 								if (ch == 'n'){ s = s + '\n'; len++; }
 								if (ch == 'r'){ s = s + '\r'; len++; }
-								if (ch == '\"'){ s = s + '\"'; len++; }
+								if (ch == 't'){ s = s + '\t'; len++; }
+								if (ch == 'v'){ s = s + '\v'; len++; }
 								if (ch == '\''){ s = s + '\''; len++; }
+								if (ch == '\"'){ s = s + '\"'; len++; }
 								cnt = 0;
 							}
 							else{
@@ -82,8 +86,14 @@ char *next_token() {
 					}
 					else{
 						s = s + (char)ch; len++;
+						if (s == "#\\backspace"){ s = "#\\\b"; len = 3; }
+						if (s == "#\\page"){ s = "#\\\f"; len = 3; }
+						if (s == "#\\newline"){ s = "#\\\n"; len = 3; }
+						if (s == "#\\return"){ s = "#\\\r"; len = 3; }
+						if (s == "#\\tab"){ s = "#\\\t"; len = 3; }
+						if (s == "#\\vtab"){ s = "#\\\v"; len = 3; }
+						if (s == "#\\space"){ s = "#\\ "; len = 3; }
 					}
-					
                 }
         }
     }

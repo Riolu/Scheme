@@ -123,9 +123,12 @@ Boolean *Character::isString(){
 }
 
 void Character::print(){
-	if (char_ == '\t') printf("#\\tab");
+	if (char_ == '\b') printf("#\\backspace");
+	else if (char_ == '\f') printf("#\\page");
 	else if (char_ == '\n') printf("#\\newline");
 	else if (char_ == '\r') printf("#\\return");
+	else if (char_ == '\t') printf("#\\tab");
+	else if (char_ == '\v') printf("#\\vtab");
 	else if (char_ == ' ') printf("#\\space");
 	else printf("#\\%c", char_);
 }
