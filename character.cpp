@@ -4,6 +4,7 @@
 #include <cstring>
 #include <cmath>
 #include <string>
+#include <cctype>
 using namespace std;
 
 char upper(char ch){
@@ -60,6 +61,11 @@ Boolean *Character::charIsAlpha(){
 
 Boolean *Character::charIsNum(){
 	return new Boolean(char_ >= '0' && char_ <= '9');
+}
+
+Boolean *Character::charIsSpace(){
+	if (isspace(char_) == 0) return new Boolean(false);
+	else return new Boolean(true);
 }
 
 Boolean *Character::charIsUpCase(){
@@ -120,6 +126,7 @@ void Character::print(){
 	if (char_ == '\t') printf("#\\tab");
 	else if (char_ == '\n') printf("#\\newline");
 	else if (char_ == '\r') printf("#\\return");
+	else if (char_ == ' ') printf("#\\space");
 	else printf("#\\%c", char_);
 }
 

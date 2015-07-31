@@ -77,7 +77,7 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "char-ci<=?") == 0) opt = new CharCiLessequal();
 		else if (strcmp(tk1, "char-alphabetic?") == 0) opt = new CharIsAlpha();
 		else if (strcmp(tk1, "char-numeric?") == 0) opt = new CharIsNum();
-
+		else if (strcmp(tk1, "char-whitespace?") == 0) opt = new CharIsSpace();
 		else if (strcmp(tk1, "char-upper-case?") == 0) opt = new CharIsUpCase();
 		else if (strcmp(tk1, "char-lower-case?") == 0) opt = new CharIsLowCase();
 		else if (strcmp(tk1, "char->integer") == 0) opt = new CharToInt();
@@ -99,7 +99,6 @@ Datatype *calc_exp(){
 		else if (strcmp(tk1, "string") == 0) opt = new GenerateStr();
 		else if (strcmp(tk1, "string->number") == 0) opt = new StrToNum();
 		else if (strcmp(tk1, "number->string") == 0) opt = new NumToStr();
-
 		else throw 0;
         while ((val = calc_exp()))
         {

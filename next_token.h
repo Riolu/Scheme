@@ -27,20 +27,28 @@ char *next_token() {
         }
         if ((ch = fgetc(input)) == EOF)
             break;
+
         switch (ch)
         {
             case '(':
             case ')':
-                if(len>0)
-                    ans=s;cur=len;
-                s="";
-                s=s+(char)ch;
-                len=1;
-                break;
+				if (s=="#\\"){}
+				else{
+					if (len>0)
+						ans = s; cur = len;
+					s = "";
+					s = s + (char)ch;
+					len = 1;
+					break;
+				}
             default:
                 if (isspace(ch))
                 {
 					if (s[0] == '\"' && s[s.size() - 1] != '\"'){ //string can receive space
+						s = s + (char)ch;
+						len++;
+					}
+					else if (s == "#\\"){
 						s = s + (char)ch;
 						len++;
 					}

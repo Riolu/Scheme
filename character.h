@@ -16,6 +16,7 @@ public:
 	virtual Boolean *charCiLessequal(Character *char2);
 	virtual Boolean *charIsAlpha();
 	virtual Boolean *charIsNum();
+	virtual Boolean *charIsSpace();
 	virtual Boolean *charIsUpCase();
 	virtual Boolean *charIsLowCase();
 	virtual Character *charToUpCase();

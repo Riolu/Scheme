@@ -848,9 +848,13 @@ class CharIsNum :public Opt{
 	}
 };
 
-
-
-
+class CharIsSpace :public Opt{
+	Boolean *calc(Cons *con){
+		assert(con->cdr == NULL && "expected number of arguments is 1");
+		if (con->car->type_ != 5) throw 0;
+		return SCAST_CHARACTER(con->car)->charIsSpace();
+	}
+};
 
 class CharIsUpCase :public Opt{
 	Boolean *calc(Cons *con){
