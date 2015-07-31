@@ -134,6 +134,15 @@ void Character::print(){
 }
 
 Character *Character::from_string(const char *expression){
+	string str = expression;
+	if (str == "#\\backspace"){ return new Character('\b'); }
+	if (str == "#\\page"){ return new Character('\f'); }
+	if (str == "#\\newline"){ return new Character('\n'); }
+	if (str == "#\\return"){ return new Character('\r'); }
+	if (str == "#\\tab"){ return new Character('\t'); }
+	if (str == "#\\vtab"){ return new Character('\v'); }
+	if (str == "#\\space"){ return new Character(' '); }
+
 	if (strlen(expression) != 3) return NULL; 
 	if (!(expression[0] == '#' && expression[1] == '\\')) return NULL;
 	return new Character(expression[2]);

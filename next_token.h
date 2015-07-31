@@ -62,38 +62,38 @@ char *next_token() {
                 }
 				else
 				{
-					if (s[0] == '\"'){
-						if (ch == '\\'){
-							++cnt;
-							if (cnt == 2){ s = s + '\\'; len++; cnt = 0; }
-						}
-						else{
-							if (cnt == 1){
-								if (ch == 'b'){ s = s + '\b'; len++; }
-								if (ch == 'f'){ s = s + '\f'; len++; }
-								if (ch == 'n'){ s = s + '\n'; len++; }
-								if (ch == 'r'){ s = s + '\r'; len++; }
-								if (ch == 't'){ s = s + '\t'; len++; }
-								if (ch == 'v'){ s = s + '\v'; len++; }
-								if (ch == '\''){ s = s + '\''; len++; }
-								if (ch == '\"'){ s = s + '\"'; len++; }
-								cnt = 0;
-							}
-							else{
-								s = s + (char)ch; len++;
-							}
-						}
-					}
-					else{
+					//if (s[0] == '\"'){
+					//	if (ch == '\\'){
+					//		++cnt;
+					//		if (cnt == 2){ s = s + '\\'; len++; cnt = 0; }
+					//	}
+					//	else{
+					//		if (cnt == 1){
+					//			if (ch == 'b'){ s = s + '\b'; len++; }
+					//			if (ch == 'f'){ s = s + '\f'; len++; }
+					//			if (ch == 'n'){ s = s + '\n'; len++; }
+					//			if (ch == 'r'){ s = s + '\r'; len++; }
+					//			if (ch == 't'){ s = s + '\t'; len++; }
+					//			if (ch == 'v'){ s = s + '\v'; len++; }
+					//			if (ch == '\''){ s = s + '\''; len++; }
+					//			if (ch == '\"'){ s = s + '\"'; len++; }
+					//			cnt = 0;
+					//		}
+					//		else{
+					//			s = s + (char)ch; len++;
+					//		}
+					//	}
+					//}
+					//else{
 						s = s + (char)ch; len++;
-						if (s == "#\\backspace"){ s = "#\\\b"; len = 3; }
+						/*if (s == "#\\backspace"){ s = "#\\\b"; len = 3; }
 						if (s == "#\\page"){ s = "#\\\f"; len = 3; }
 						if (s == "#\\newline"){ s = "#\\\n"; len = 3; }
 						if (s == "#\\return"){ s = "#\\\r"; len = 3; }
 						if (s == "#\\tab"){ s = "#\\\t"; len = 3; }
 						if (s == "#\\vtab"){ s = "#\\\v"; len = 3; }
-						if (s == "#\\space"){ s = "#\\ "; len = 3; }
-					}
+						if (s == "#\\space"){ s = "#\\ "; len = 3; }*/
+					//}
                 }
         }
     }

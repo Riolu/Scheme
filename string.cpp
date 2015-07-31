@@ -174,10 +174,28 @@ void String::print(){
 }
 
 String *String::from_string(const char *expression){
-	int len = strlen(expression);
-	if (expression[0] != '\"' || expression[len - 1] != '\"') return NULL;
 	string str = expression;
-	return new String(str.substr(1,len-2));
+	int len = str.size();
+	if (str[0] != '\"' || str[len - 1] != '\"') return NULL;
+	str = str.substr(1, len - 2);
+	string res = "";
+	int i = 0;
+	while (i < str.size()){
+		if (str[i] == '\\'){
+			if (str[i + 1] == 'b') res += '\b';
+			if (str[i + 1] == 'f') res += '\f';
+			if (str[i + 1] == 'n') res += '\n';
+			if (str[i + 1] == 'r') res += '\r';
+			if (str[i + 1] == 't') res += '\t';
+			if (str[i + 1] == 'v') res += '\v';
+			if (str[i + 1] == '\\') res += '\\';
+			if (str[i + 1] == '\'') res += '\'';
+			if (str[i + 1] == '\"') res += '\"';
+			i += 2;
+		}
+		else { res += str[i]; ++i; }
+	}
+	return new String(res);
 }
 
 String *String::makeStr(Number *number, Character *ch){
