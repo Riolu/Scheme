@@ -732,55 +732,103 @@ class IsInexact :public Opt{
 
 class CharIsEqual :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
-		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->charIsEqual(second);
+		Boolean *res = new Boolean(), *last;
+		Character *first, *second;
+		if (con->car->type_ != 5) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 5) throw 0;
+			first = SCAST_CHARACTER(con->car), second = SCAST_CHARACTER(con->cdr->car);
+			last = res;
+			res = first->charIsEqual(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class CharIsCiEqual :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
-		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->charIsCiEqual(second);
+		Boolean *res = new Boolean(), *last;
+		Character *first, *second;
+		if (con->car->type_ != 5) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 5) throw 0;
+			first = SCAST_CHARACTER(con->car), second = SCAST_CHARACTER(con->cdr->car);
+			last = res;
+			res = first->charIsCiEqual(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class CharLess :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
-		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->charLess(second);
+		Boolean *res = new Boolean(), *last;
+		Character *first, *second;
+		if (con->car->type_ != 5) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 5) throw 0;
+			first = SCAST_CHARACTER(con->car), second = SCAST_CHARACTER(con->cdr->car);
+			last = res;
+			res = first->charLess(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class CharCiLess :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
-		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->charCiLess(second);
+		Boolean *res = new Boolean(), *last;
+		Character *first, *second;
+		if (con->car->type_ != 5) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 5) throw 0;
+			first = SCAST_CHARACTER(con->car), second = SCAST_CHARACTER(con->cdr->car);
+			last = res;
+			res = first->charCiLess(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class CharLessequal :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
-		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->charLessequal(second);
+		Boolean *res = new Boolean(), *last;
+		Character *first, *second;
+		if (con->car->type_ != 5) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 5) throw 0;
+			first = SCAST_CHARACTER(con->car), second = SCAST_CHARACTER(con->cdr->car);
+			last = res;
+			res = first->charLessequal(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class CharCiLessequal :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 5 || con->cdr->car->type_ != 5) throw 0;
-		Character *first = SCAST_CHARACTER(con->car), *second = SCAST_CHARACTER(con->cdr->car);
-		return first->charCiLessequal(second);
+		Boolean *res = new Boolean(), *last;
+		Character *first, *second;
+		if (con->car->type_ != 5) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 5) throw 0;
+			first = SCAST_CHARACTER(con->car), second = SCAST_CHARACTER(con->cdr->car);
+			last = res;
+			res = first->charCiLessequal(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
@@ -854,55 +902,103 @@ class CharToDownCase :public Opt{
 
 class StrIsEqual :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
-		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
-		return first->strIsEqual(second);
+		Boolean *res = new Boolean(), *last;
+		String *first, *second;
+		if (con->car->type_ != 6) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 6) throw 0;
+			first = SCAST_STRING(con->car), second = SCAST_STRING(con->cdr->car);
+			last = res;
+			res = first->strIsEqual(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class StrIsCiEqual :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
-		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
-		return first->strIsCiEqual(second);
+		Boolean *res = new Boolean(), *last;
+		String *first, *second;
+		if (con->car->type_ != 6) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 6) throw 0;
+			first = SCAST_STRING(con->car), second = SCAST_STRING(con->cdr->car);
+			last = res;
+			res = first->strIsCiEqual(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class StrLess :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
-		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
-		return first->strLess(second);
+		Boolean *res = new Boolean(), *last;
+		String *first, *second;
+		if (con->car->type_ != 6) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 6) throw 0;
+			first = SCAST_STRING(con->car), second = SCAST_STRING(con->cdr->car);
+			last = res;
+			res = first->strLess(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class StrCiLess :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
-		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
-		return first->strCiLess(second);
+		Boolean *res = new Boolean(), *last;
+		String *first, *second;
+		if (con->car->type_ != 6) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 6) throw 0;
+			first = SCAST_STRING(con->car), second = SCAST_STRING(con->cdr->car);
+			last = res;
+			res = first->strCiLess(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class StrLessequal :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
-		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
-		return first->strLessequal(second);
+		Boolean *res = new Boolean(), *last;
+		String *first, *second;
+		if (con->car->type_ != 6) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 6) throw 0;
+			first = SCAST_STRING(con->car), second = SCAST_STRING(con->cdr->car);
+			last = res;
+			res = first->strLessequal(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 
 class StrCiLessequal :public Opt{
 	Boolean *calc(Cons *con){
-		assert(con->cdr->cdr == NULL && "expected number of arguments is 2");
-		if (con->car->type_ != 6 || con->cdr->car->type_ != 6) throw 0;
-		String *first = SCAST_STRING(con->car), *second = SCAST_STRING(con->cdr->car);
-		return first->strCiLessequal(second);
+		Boolean *res = new Boolean(), *last;
+		String *first, *second;
+		if (con->car->type_ != 6) throw 0;
+		for (; con->cdr; con = con->cdr){
+			if (con->cdr->car->type_ != 6) throw 0;
+			first = SCAST_STRING(con->car), second = SCAST_STRING(con->cdr->car);
+			last = res;
+			res = first->strCiLessequal(second);
+			delete last;
+			if (res->value_ == false) break;
+		}
+		return res;
 	}
 };
 

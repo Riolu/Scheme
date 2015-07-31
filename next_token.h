@@ -9,6 +9,7 @@ using namespace std;
 FILE *input = stdin;
 string s="";
 int len=0;
+int cnt = 0;
 char *next_token() {
     char *res = NULL;
 	string ans;
@@ -39,15 +40,42 @@ char *next_token() {
             default:
                 if (isspace(ch))
                 {
-                    if(len>0)
-                         ans=s;cur=len;
-                    s="";
-                    len=0;
+					if (s[0] == '\"' && s[s.size() - 1] != '\"'){ //string can receive space
+						s = s + (char)ch;
+						len++;
+					}
+					else{
+						if (len > 0)
+							ans = s; cur = len;
+						s = "";
+						len = 0;
+					}
                 }
-                else
+				else
 				{
-					s=s+(char)ch;
-                    len++;
+					if (s[0] == '\"'){
+						if (ch == '\\'){
+							++cnt;
+							if (cnt == 2){ s = s + '\\'; len++; cnt = 0; }
+						}
+						else{
+							if (cnt == 1){
+								if (ch == 't'){ s = s + '\t'; len++; }
+								if (ch == 'n'){ s = s + '\n'; len++; }
+								if (ch == 'r'){ s = s + '\r'; len++; }
+								if (ch == '\"'){ s = s + '\"'; len++; }
+								if (ch == '\''){ s = s + '\''; len++; }
+								cnt = 0;
+							}
+							else{
+								s = s + (char)ch; len++;
+							}
+						}
+					}
+					else{
+						s = s + (char)ch; len++;
+					}
+					
                 }
         }
     }

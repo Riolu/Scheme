@@ -117,7 +117,10 @@ Boolean *Character::isString(){
 }
 
 void Character::print(){
-	printf("#\\%c", char_);
+	if (char_ == '\t') printf("#\\tab");
+	else if (char_ == '\n') printf("#\\newline");
+	else if (char_ == '\r') printf("#\\return");
+	else printf("#\\%c", char_);
 }
 
 Character *Character::from_string(const char *expression){
